@@ -9,15 +9,18 @@ NO fancy DB server, all in flattfiles,
 
 If you are interested and would like to participate, [please drop me a note ->](https://www.fischerman.ch/?page_id=11)
 
-├──────────────────────────────────────────────────────────────
+─────────────────────────────────────────────────────────
 
 Thing's done : 
 - very basic index webpage on port 7777 with links to subpages
 - generate subpages with backlink to main
 
-├──────────────────────────────────────────────────────────────
+─────────────────────────────────────────────────────────
 Thing's to do : 
+
 GENERIC
+- ...
+- ...
 
 ARP
 - generate arpwatch configure and start page
