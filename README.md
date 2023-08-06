@@ -13,7 +13,7 @@ If you are interested and would like to participate, [please drop me a note ->](
 
 Thing's done : 
 - very basic index webpage on port 7777 with links to subpages
-- generate subpages with backlink to main
+- very basic subpages with backlink to main
 
 ─────────────────────────────────────────────────────────
 
