@@ -8,7 +8,7 @@ If you are interested and would like to participate, [please drop me a note ->](
 
 
 Thing's done : 
-- index webpage on port 7777 with links to subpages
+- very basic index webpage on port 7777 with links to subpages
 
 Thing's to do : 
 GENERIC
