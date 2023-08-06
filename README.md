@@ -9,6 +9,8 @@ NO fancy DB server, all in flattfiles,
 
 If you are interested and would like to participate, [please drop me a note ->](https://www.fischerman.ch/?page_id=11)
 
+and btw, it's black and green because I like black and green ;-)
+
 ─────────────────────────────────────────────────────────
 
 Thing's done : 
