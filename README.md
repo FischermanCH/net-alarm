@@ -9,10 +9,11 @@ If you are interested and would like to participate, [please drop me a note ->](
 
 Thing's done : 
 - very basic index webpage on port 7777 with links to subpages
+- generate subpages with backlink to main
+
 
 Thing's to do : 
 GENERIC
-- generate subpages with main menu on each page
 
 ARP
 - generate arpwatch configure and start page
