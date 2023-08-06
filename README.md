@@ -4,10 +4,8 @@
 Goal is to create a web-based network inventory for small/home LAN's
 NO fancy DB server, all in flattfiles, for each IP address it's own csv-file
 
-If you are interested and would like to paricipate, drop me a note -> [Fischerman.CH Website/Contact](https://www.fischerman.ch/?page_id=11)
+If you are interested and would like to paricipate, please drop me a note -> <a href="https://www.fischerman.ch/?page_id=11" target="_blank">https://www.fischerman.ch/?page_id=11</a>
 
-
-// 08.2023, FischermanCH //
 
 Thing's done : 
 - index webpage on port 7777 with links to subpages
@@ -41,3 +39,6 @@ MAIN PAGE
 - Overview for each section
 - time and date
 - time since last update 
+
+
+// 08.2023, FischermanCH //
