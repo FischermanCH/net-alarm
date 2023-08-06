@@ -10,7 +10,29 @@ If you are interested and would like to paricipate, drop me a note -> [Fischerma
 
 // 08.2023, FischermanCH //
 
-Thin's done : 
+Thing's done : 
 - index webpage on port 7777 with links to subpages
 
-
+Thing's to do : 
+GENERIC
+- generate subpages with main menu on each page
+ARP
+- generate arpwatch configure and start page
+- generate arpwatch import (code ecisting, needs to be integrated)
+TPC
+- ....
+- ....
+HOST
+- ....
+- ....
+LAN
+- ....
+- ....
+ALERTING
+- configure alerting
+-- e-mail
+-- other 
+MAIN PAGE
+- Overview for each section
+- time and date
+- time since last update 
