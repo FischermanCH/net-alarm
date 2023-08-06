@@ -11,5 +11,6 @@ If you are interested and would like to paricipate, drop me a note -> [Fischerma
 // 08.2023, FischermanCH //
 
 Thin's done : 
-index webpage on port 7777 with links to subpages
+- index webpage on port 7777 with links to subpages
+
 
