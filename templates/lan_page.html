@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to net-alarm</title>
+    <title>Welcome to net-alarm - ARP page</title>
     <style>
         body {
             background-color: black;
@@ -49,31 +49,20 @@
     <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
         <tr>
             <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
-            <td class="left"><h1>Welcome to net-alarm</h1></td>
+            <td class="left"><h1>Welcome to the LAN-PAGE</h1></td>
         </tr>
     </table>
     <div class="line"></div>
     <table>
         <tr>
-            <td class="right"><a href="{{ url_for('arp_page') }}" class="middle">ARP page</a></td>
+            <td class="right"><a href="#" class="middle">some sub-page</a></td>
             <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
         </tr>
-        <tr>
-            <td class="right"><a href="{{ url_for('tcpip_page') }}" class="middle">TCP/IP page</a></td>
-            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
-        </tr>
-        <tr>
-            <td class="right"><a href="{{ url_for('host_page') }}" class="middle">Host page</a></td>
-            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
-        </tr>
-        <tr>
-            <td class="right"><a href="{{ url_for('lan_page') }}" class="middle">LAN page</a></td>
-            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
-        </tr>
+        <!-- Repeat similar rows for other sub-pages -->
     </table>
     <div class="line"></div>
     <div class="footer">
-        <p><a href="https://github.com/FischermanCH/net-alarm" target="_blank">Project home page -></a></p>
+        <p><a href="{{ url_for('index') }}">back to main</a></p>
     </div>
 </body>
 </html>
