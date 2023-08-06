@@ -35,8 +35,8 @@ LAN
 
 ALERTING
 - configure alerting
--- e-mail
--- other 
+    - e-mail
+    - other 
 
 MAIN PAGE
 - Overview for each section
