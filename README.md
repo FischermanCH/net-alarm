@@ -43,7 +43,7 @@ MAIN PAGE
 
 
 File structure 
-
+```
 net-alarm/
 │
 ├── app.py
@@ -60,5 +60,6 @@ net-alarm/
 │   └── lan_page.html
 │
 └── venv/ (your virtual environment directory, if used)
+```
 
 
