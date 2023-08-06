@@ -46,7 +46,7 @@ File structure
 ```
 net-alarm/
 │
-├── app.py
+├── net-alarm.py
 │
 ├── static/
 │   └── images/
