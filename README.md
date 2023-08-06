@@ -45,18 +45,14 @@ MAIN PAGE
 File structure 
 
 net-alarm/
-│
 ├── app.py
-│
 ├── static/
 │   └── images/
 │       └── icon_placeholder.png
-│
 ├── templates/
 │   ├── index.html
 │   ├── arp_page.html
 │   ├── tcpip_page.html
 │   ├── host_page.html
-│   ├── lan_page.html
-│
-└── venv/       (your virtual environment directory, if you're using one)
+│   └── lan_page.html
+└── venv/       (your virtual environment directory, if used)
