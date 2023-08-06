@@ -16,22 +16,28 @@ Thing's done :
 Thing's to do : 
 GENERIC
 - generate subpages with main menu on each page
+
 ARP
 - generate arpwatch configure and start page
-- generate arpwatch import (code ecisting, needs to be integrated)
+- generate arpwatch import (code existing, needs to be integrated)
+
 TPC
 - ....
 - ....
+
 HOST
 - ....
 - ....
+
 LAN
 - ....
 - ....
+
 ALERTING
 - configure alerting
 -- e-mail
 -- other 
+
 MAIN PAGE
 - Overview for each section
 - time and date
