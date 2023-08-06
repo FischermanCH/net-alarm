@@ -42,4 +42,21 @@ MAIN PAGE
 - time since last update 
 
 
-// 08.2023, FischermanCH //
+File structure 
+
+net-alarm/
+│
+├── app.py
+│
+├── static/
+│   └── images/
+│       └── icon_placeholder.png
+│
+├── templates/
+│   ├── index.html
+│   ├── arp_page.html
+│   ├── tcpip_page.html
+│   ├── host_page.html
+│   ├── lan_page.html
+│
+└── venv/       (your virtual environment directory, if you're using one)
