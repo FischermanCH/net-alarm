@@ -4,7 +4,7 @@
 Goal is to create a web-based network inventory for small/home LAN's
 NO fancy DB server, all in flattfiles, for each IP address it's own csv-file
 
-If you are interested and would like to paricipate, please drop me a note -> <a href="https://www.fischerman.ch/?page_id=11" target="_blank">https://www.fischerman.ch/?page_id=11</a>
+If you are interested and would like to paricipate, <a href="please drop me a note ->" target="_blank">https://www.fischerman.ch/?page_id=11</a>
 
 
 Thing's done : 
