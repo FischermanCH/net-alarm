@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to net-alarm</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 77%;
+            margin: auto;
+        }
+        
+        td {
+            padding: 10px;
+            text-align: center;
+            width: 50%;
+            vertical-align: middle;
+        }
+
+        td.left {
+            text-align: left;
+        }
+
+        td.right {
+            text-align: right;
+        }
+
+        .line {
+            width: 80%;
+            border-bottom: 1px solid #00ff00;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to net-alarm</h1>
+    <table>
+        <tr>
+            <td class="right"><a href="#">ARP page</a></td>
+            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
+        </tr>
+        <tr>
+            <td class="right"><a href="#">TCP/IP page</a></td>
+            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
+        </tr>
+        <tr>
+            <td class="right"><a href="#">Host page</a></td>
+            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
+        </tr>
+        <tr>
+            <td class="right"><a href="#">LAN page</a></td>
+            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
+        </tr>
+    </table>
+    <div class="line"></div>
+    <div class="footer">
+        <p><a href="https://github.com/FischermanCH/net-alarm" target="_blank">Project home page -></a></p>
+    </div>
+</body>
+</html>
