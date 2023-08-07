@@ -54,18 +54,15 @@
 <body>
     <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
         <tr>
-            <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
             <td class="left"><h1>ARPWATCH IMPORT</h1></td>
         </tr>
     </table>
     <div class="line"></div>
-    <table>
-              <tr>
-            <td class="right"><a href="{{ url_for('arp_arpwatch_import') }}" class="middle">arpwatch original file import</a></td>
-            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
-        </tr>
-        <!-- Repeat similar rows for other sub-pages -->
-    </table>
+    <form action="/arp_arpwatch_import" method="POST" enctype="multipart/form-data">
+        <label for="file">Upload ARP file:</label>
+        <input type="file" name="file" accept=".csv">
+        <input type="submit" value="Upload">
+    </form>
     <div class="line"></div>
     <div class="footer">
         <p><a href="javascript:history.back()">Go back</a></p>

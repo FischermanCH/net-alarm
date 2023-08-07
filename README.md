@@ -59,8 +59,6 @@ net-alarm/
 │
 ├── net-alarm.py
 │
-├── arp_arpwatch_import.py
-│
 ├── static/
 │   └── images/
 │       └── icon_placeholder.png
@@ -68,10 +66,13 @@ net-alarm/
 ├── templates/
 │   ├── index.html
 │   ├── arp_page.html
-│   ├── arp_arpwatch_import.html
 │   ├── tcpip_page.html
 │   ├── host_page.html
 │   └── lan_page.html
+│
+├── scripts/
+│   └── arp/
+│       └── arp_arpwatch_import.py
 │
 └── venv/ (your virtual environment directory, if used)
 ```
