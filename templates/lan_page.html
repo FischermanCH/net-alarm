@@ -50,6 +50,11 @@
             margin-top: 20px;
         }
     </style>
+    <script>
+        function showPlaceholderAlert() {
+            alert("Function needs to be implemented");
+        }
+    </script>
 </head>
 <body>
     <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
@@ -61,7 +66,7 @@
     <div class="line"></div>
     <table>
         <tr>
-            <td class="right"><a href="#" class="middle">some sub-page</a></td>
+            <td class="right"><a href="javascript:void(0);" class="middle" onclick="showPlaceholderAlert();">some sub-page</a></td>
             <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
         </tr>
         <!-- Repeat similar rows for other sub-pages -->
