@@ -55,26 +55,28 @@ MAIN PAGE
 
 File structure 
 ```
-net-alarm/
-│
+net-alarm
+├── data
+│   ├── export
+│   └── import
 ├── net-alarm.py
-│
-├── static/
-│   └── images/
+├── README.md
+├── scripts
+│   ├── arp
+│   │   └── arp_arpwatch_import.py
+│   ├── hosts
+│   ├── lan
+│   └── tcpip
+├── static
+│   └── images
 │       └── icon_placeholder.png
-│
-├── templates/
-│   ├── index.html
-│   ├── arp_page.html
-│   ├── tcpip_page.html
-│   ├── host_page.html
-│   └── lan_page.html
-│
-├── scripts/
-│   └── arp/
-│       └── arp_arpwatch_import.py
-│
-└── venv/ (your virtual environment directory, if used)
+└── templates
+    ├── arp_arpwatch_import.html
+    ├── arp_page.html
+    ├── host_page.html
+    ├── index.html
+    ├── lan_page.html
+    └── tcpip_page.html
 ```
 
 
