@@ -22,5 +22,9 @@ def host_page():
 def lan_page():
     return render_template('lan_page.html')
 
+@app.route('/arp_arpwatch_import')
+def arp_arpwatch_import():
+    return render_template('arp_arpwatch_import.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)
