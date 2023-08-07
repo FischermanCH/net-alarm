@@ -17,6 +17,7 @@ Thing's done :
 - very basic index webpage on port 7777 with links to subpages
 - very basic subpages with backlink to main
 - very basic arpwatch import page (arp_arpwatch_import.html & arp_arpwatch_import.py)
+    - basic import of a file working and saved to data/import/arpwatch_import_YYMMDD
 
 ─────────────────────────────────────────────────────────
 
@@ -28,7 +29,9 @@ GENERIC
 
 ARP
 - generate arpwatch configure and start page
-- generate arpwatch import (code existing, needs to be integrated)
+- generate arpwatch import
+    - should import default arpwatch file, reformating it as csv with ";" as delimiter and save it as arpwatch_import_YYMMDD.csv in data/import
+    - diff with data/arp_addresses.csv and add from data/import/arpwatch_import_YYMMDD.csv (latest version) if data is mmissing in data/arp_addresses.csv add it from data/import/arpwatch_import_YYMMDD.csv
 
 TCP
 - ....
