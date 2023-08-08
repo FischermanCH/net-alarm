@@ -11,7 +11,7 @@ If you are interested and would like to participate, [please drop me a note ->](
 
 and btw, it's black and green because I like black and green ;-)
 
-─────────────────────────────────────────────────────────
+---
 
 Thing's done : 
 - very basic index webpage on port 7777 with links to subpages
@@ -19,7 +19,7 @@ Thing's done :
 - very basic arpwatch import page (arp_arpwatch_import.html & arp_arpwatch_import.py)
     - basic import of a file working and saved to data/import/arpwatch_import_YYMMDD
 
-─────────────────────────────────────────────────────────
+---
 
 Thing's to do : 
 
@@ -55,6 +55,7 @@ MAIN PAGE
 - time and date
 - time since last update 
 
+---
 
 File structure 
 ```
