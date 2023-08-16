@@ -3,32 +3,26 @@ from scripts.arp.arp_arpwatch_import import import_arp_file
 
 app = Flask(__name__)
 
-# Index page route
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# ARP page route
 @app.route('/arp_page')
 def arp_page():
     return render_template('arp_page.html')
 
-# TCP/IP page route
 @app.route('/tcpip_page')
 def tcpip_page():
     return render_template('tcpip_page.html')
 
-# Host page route
 @app.route('/host_page')
 def host_page():
     return render_template('host_page.html')
 
-# LAN page route
 @app.route('/lan_page')
 def lan_page():
     return render_template('lan_page.html')
 
-# ARP Import page route
 @app.route('/arp_arpwatch_import', methods=['GET', 'POST'])
 def arp_arpwatch_import():
     if request.method == 'POST':
@@ -36,7 +30,7 @@ def arp_arpwatch_import():
         if import_arp_file(file):
             return 'ARP Import Script Executed Successfully :-)'
         else:
-            return 'Invalid file format. Please upload a CSV file.'
+            return 'Invalid file format. Please upload a valid file.'
     return render_template('arp_arpwatch_import.html')
 
 if __name__ == '__main__':
