@@ -33,5 +33,9 @@ def arp_arpwatch_import():
             return 'Invalid file format. Please upload a valid file.'
     return render_template('arp_arpwatch_import.html')
 
+@app.route('/arp_table')
+def arp_table():
+    return render_template('arp_table.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)
