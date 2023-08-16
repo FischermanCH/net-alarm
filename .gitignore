@@ -1,13 +1,3 @@
-data/*
-!data/
-data/*.*
-!data/import/
-data/import/*.*
-!data/export/
-data/export/*.*
-!data/arpwatch/
-data/arpwatch/*.*
-data/arpwatch/testfile
 data/arpwatch/arpwatch_2308110108
 data/arpwatch/arpwatch_2308110108-
 data/arpwatch/arpwatch_output_2308110108.log
