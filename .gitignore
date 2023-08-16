@@ -9,3 +9,8 @@ data/*
 !data/import/
 !data/export/
 !data/arpwatch/
+data/*
+!data/
+!data/import/
+!data/export/
+!data/arpwatch/
