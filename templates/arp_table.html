@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>net-alarm - MAC Address Overview</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </head>
 <body>
     <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
         <tr>
             <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
-            <td class="left"><h1>MAC Address Overview</h1></td>
+            <td class="left"><h1>MAC/ARP</h1></td>
         </tr>
     </table>
-    <table id="arpTableHeader">
+
+    <table id="arpTableHeader" style="width: 70%; margin: auto;">
         <thead>
             <tr>
                 <th onclick="sortTable(0)">ARP address</th>
@@ -27,8 +26,9 @@
         </thead>
     </table>
     <div class="scrollable-tbody">
-        <table id="arpTableBody">
+        <table id="arpTableBody" style="width: 70%; margin: auto;">
             <tbody>
+                <!-- Data from arp_data.csv will be populated here -->
                 {% for row in arp_data %}
                 <tr>
                     <td>{{ row[0] }}</td>
@@ -43,7 +43,6 @@
     </div>
 
     <script>
-        // Sort table function
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById("arpTableBody");
@@ -81,14 +80,12 @@
             }
         }
 
-        // Update hostname function
         function updateHostname(cell, macAddress, ipAddress) {
             var newHostname = cell.innerText;
-            $.post("/update_hostname", {
-                macAddress: macAddress,
-                ipAddress: ipAddress,
-                hostname: newHostname
-            });
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/update_hostname", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("macAddress=" + encodeURIComponent(macAddress) + "&ipAddress=" + encodeURIComponent(ipAddress) + "&hostname=" + encodeURIComponent(newHostname));
         }
 
         // Sort by IP address by default on page load
@@ -96,6 +93,7 @@
             sortTable(1);
         };
     </script>
+
     <div class="line"></div>
     <div class="footer">
         <p><a href="javascript:history.back()">Go back</a></p>
