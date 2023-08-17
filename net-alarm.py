@@ -1,8 +1,18 @@
-from flask import Flask, render_template, request
-from scripts.arp.arp_arpwatch_import import import_arp_file
-from scripts.arp.arp_table import get_arp_table_data
+from flask import Flask, render_template, request, jsonify
+import csv
+import os
 
 app = Flask(__name__)
+
+def get_arp_table_data():
+    """Reads the arp_data.csv file and returns its content."""
+    data = []
+    file_path = os.path.join("data", "arp_data.csv")
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file:
+            reader = csv.reader(file, delimiter=';')
+            data = list(reader)
+    return data
 
 @app.route('/')
 def index():
@@ -38,6 +48,32 @@ def arp_arpwatch_import():
 def arp_table():
     arp_data = get_arp_table_data()
     return render_template('arp_table.html', arp_data=arp_data)
+
+@app.route('/update_hostname', methods=['POST'])
+def update_hostname():
+    data = request.json
+    mac_address = data['macAddress']
+    ip_address = data['ipAddress']
+    new_hostname = data['hostname']
+
+    # Path to the arp_data.csv file
+    file_path = os.path.join("data", "arp_data.csv")
+
+    # Read the CSV file and update the hostname
+    with open(file_path, 'r') as file:
+        rows = list(csv.reader(file, delimiter=';'))
+
+    for row in rows:
+        if row[0] == mac_address and row[1] == ip_address:
+            row[3] = new_hostname
+            break
+
+    # Write the updated data back to the CSV file
+    with open(file_path, 'w', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerows(rows)
+
+    return jsonify(success=True)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)
