@@ -5,3 +5,5 @@ data/arpwatch/arpwatch_output_2308110108.log
 data/import/arpwatch_import_230816.csv
 data/import/arpwatch_import_230817.csv
 data/arp_data.csv
+scripts/arp/__pycache__/arp_arpwatch_import.cpython-39.pyc
+scripts/arp/__pycache__/arp_table.cpython-39.pyc
