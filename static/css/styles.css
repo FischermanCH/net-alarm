@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+    color: #005500;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    color: #00ff00;
+    text-decoration: none;
+}
+
+table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 77%;
+    margin: auto;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+    width: 50%;
+    vertical-align: middle;
+}
+
+td.left {
+    text-align: left;
+}
+
+td.right {
+    text-align: right;
+}
+
+.line {
+    width: 80%;
+    border-bottom: 1px solid #00ff00;
+    margin: 20px 0;
+}
+
+.footer {
+    margin-top: 20px;
+}
+
+th {
+    background-color: #333333;
+    cursor: pointer;
+}
