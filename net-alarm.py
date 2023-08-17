@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from scripts.arp.arp_arpwatch_import import import_arp_file
+from scripts.arp.arp_table import get_arp_table_data
 
 app = Flask(__name__)
 
@@ -35,7 +36,8 @@ def arp_arpwatch_import():
 
 @app.route('/arp_table')
 def arp_table():
-    return render_template('arp_table.html')
+    arp_data = get_arp_table_data()
+    return render_template('arp_table.html', arp_data=arp_data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)

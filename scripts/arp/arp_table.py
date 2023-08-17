@@ -24,8 +24,11 @@ def update_arp_data(latest_file):
         reader = csv.reader(f, delimiter=';')
         new_data = list(reader)
 
-    # Update existing data with new data
+    # Convert timestamp to human-readable date format
     for row in new_data:
+        timestamp = int(row[2])
+        formatted_date = datetime.utcfromtimestamp(timestamp).strftime('%d.%m.%y / %H:%M:%S')
+        row[2] = formatted_date
         if row not in existing_data:
             existing_data.append(row)
 
@@ -41,4 +44,3 @@ def get_arp_table_data():
     if latest_file:
         return update_arp_data(latest_file)
     return []
-
