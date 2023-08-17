@@ -1,9 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ARP Table</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>net-alarm - MAC Address Overview</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
+        <tr>
+            <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
+            <td class="left"><h1>MAC Address Overview</h1></td>
+        </tr>
+    </table>
+    <table id="arpTableHeader">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">ARP address</th>
+                <th onclick="sortTable(1)">IP address</th>
+                <th onclick="sortTable(2)">Date</th>
+                <th onclick="sortTable(3)">Hostname</th>
+                <th onclick="sortTable(4)">Interface</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="scrollable-tbody">
+        <table id="arpTableBody">
+            <tbody>
+                {% for row in arp_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
     <script>
+        // Sort table function
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById("arpTableBody");
@@ -41,56 +81,21 @@
             }
         }
 
+        // Update hostname function
         function updateHostname(cell, macAddress, ipAddress) {
-            var updatedHostname = cell.innerText;
-
-            // Send the updated data to the server using AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/update_hostname', true);
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-            xhr.send(JSON.stringify({
+            var newHostname = cell.innerText;
+            $.post("/update_hostname", {
                 macAddress: macAddress,
                 ipAddress: ipAddress,
-                hostname: updatedHostname
-            }));
+                hostname: newHostname
+            });
         }
+
+        // Sort by IP address by default on page load
+        window.onload = function() {
+            sortTable(1);
+        };
     </script>
-</head>
-<body>
-    <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
-        <tr>
-            <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
-            <td class="left"><h1>ARP OVERVIEW</h1></td>
-        </tr>
-    </table>
-    <div class="table-container">
-        <table id="arpTableHeader">
-            <thead>
-                <tr>
-                    <th onclick="sortTable(0)">ARP address</th>
-                    <th onclick="sortTable(1)">IP address</th>
-                    <th onclick="sortTable(2)">Last seen</th>
-                    <th onclick="sortTable(3)">Hostname</th>
-                    <th onclick="sortTable(4)">Interface</th>
-                </tr>
-            </thead>
-        </table>
-        <div class="scrollable-tbody">
-            <table id="arpTableBody">
-                <tbody>
-                    {% for row in arp_data %}
-                    <tr>
-                        <td>{{ row[0] }}</td>
-                        <td>{{ row[1] }}</td>
-                        <td>{{ row[2] }}</td>
-                        <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
-                        <td>{{ row[4] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
     <div class="line"></div>
     <div class="footer">
         <p><a href="javascript:history.back()">Go back</a></p>
