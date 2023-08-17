@@ -1,5 +1,7 @@
+data/arp-data.csv
 data/arpwatch/arpwatch_2308110108
 data/arpwatch/arpwatch_2308110108-
 data/arpwatch/arpwatch_output_2308110108.log
+data/import/arpwatch_import_230816.csv
 data/import/arpwatch_import_230817.csv
-data/arp-data.csv
+data/arp_data.csv
