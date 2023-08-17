@@ -25,7 +25,7 @@ and btw, it's black and green because I like black and green ;-)
     - if not exist, automatic creation of net-alarm/data/arp_data.csv
     - automatic import of latest : net-alarm/data/arpwatch/arpwatch_YYDDMM file, 
         - compare and import if needed to net-alarm/data/arp_data.csv
-    - Present result in sortable table
+    - present result in sortable table
 - CSS file generation to support themes in the future ;-)
 
 ---
