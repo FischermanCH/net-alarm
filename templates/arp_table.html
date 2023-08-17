@@ -11,16 +11,15 @@
             flex-direction: column;
             align-items: center;
         }
-   
-        /* Set the font color for all anchor (link) elements */
+
         a {
             color: #00ff00;
-            text-decoration: none; /* Remove underline from links */
+            text-decoration: none;
         }
-        
+
         table {
             border-collapse: collapse;
-            width: 90%;
+            width: 70%;
             margin: 20px 0;
         }
 
@@ -32,19 +31,58 @@
 
         th {
             background-color: #333333;
+            cursor: pointer;  /* Indicates the header is clickable */
         }
     </style>
+    <script>
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("arpTable");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>ARP Data</h1>
-    <table>
+    <table id="arpTable">
         <thead>
             <tr>
-                <th>ARP address</th>
-                <th>IP address</th>
-                <th>Date</th>
-                <th>Hostname</th>
-                <th>Interface</th>
+                <th onclick="sortTable(0)">ARP address</th>
+                <th onclick="sortTable(1)">IP address</th>
+                <th onclick="sortTable(2)">Date</th>
+                <th onclick="sortTable(3)">Hostname</th>
+                <th onclick="sortTable(4)">Interface</th>
             </tr>
         </thead>
         <tbody>
