@@ -1,11 +1,14 @@
 ## Python Application
-# Webbased Network Inventory based on arpwatch, nmap and other gpl tools
+# Webbased Network Inventory/Alarming based on arpwatch & nmap
 
-Goal is to create a web-based network inventory for small/home LAN's.
-NO fancy DB server, all in flattfiles, 
-- for aprwatch output -> arpwatch-csv 
-- for each IP address it's own csv-file
-- for each host it's own csv-file
+Goal is to create a web-based network inventory/alarming for small/home LAN's.
+- NO fancy DB server, all in flattfiles
+- Easy and understandable for (skilled) end-user's
+- Posibility to work with import-files (to avoid root-issue when running aprwatch or nmap)
+- Posibility to export in different formats, (e.g. export a hostfile for your FW/pi-hole)
+- Integration and configuration for aprwatch and nmap
+- Posibility for some kind of an alerting (if used with integrated arpwatch/nmap)
+- Easy installation, maybe also as pre-configured bundle for cheap hardware (Raspi's)
 
 If you are interested and would like to participate, [please drop me a note ->](https://www.fischerman.ch/?page_id=11)
 
@@ -13,7 +16,7 @@ and btw, it's black and green because I like black and green ;-)
 
 ---
 
-Thing's done : 
+**Thing's done :**
 - basic index webpage on port 7777 with links to subpages
 - basic subpages with backlink to main
 - basic arpwatch import page (arp_arpwatch_import.html & arp_arpwatch_import.py)
@@ -26,12 +29,10 @@ Thing's done :
 
 ---
 
-Thing's to do : 
-
+**Thing's to do :**
 GENERIC
 - ...
 - ...
-
 ARP
 - generate arpwatch configure and start page
 - replace "edit actual arp-file" with arpwatch-config and use "show actual arp-file" as main arp-show and manipulate page
