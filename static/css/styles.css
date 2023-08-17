@@ -13,7 +13,16 @@ table h1 {
 
 /* For the footer */
 .footer {
-    background-color: #003300;
+    cursor: pointer;
+    border: 1px solid #003300;
+    text-align: center;
+    padding: 5px;
+}
+
+.footer p {
+    margin: 0;
+    color: #00ff00;
+    text-decoration: none;
 }
 
 a {
@@ -70,7 +79,7 @@ th {
 
 
 .scrollable-tbody {
-    max-height: 620px; /* Adjust this value based on your preference */
+    max-height: 410px; /* Adjust this value based on your preference */
     overflow-y: auto;
     border-collapse: collapse;
 }
