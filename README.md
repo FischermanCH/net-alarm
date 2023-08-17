@@ -79,7 +79,7 @@ net-alarm
 │   ├── arp
 │   │   ├── arp_arpwatch_import.py
 │   │   ├── arp_table.py
-│   │   └── __pycache__ 
+│   │   └── __pycache__                             /no git sync
 │   │       ├── arp_arpwatch_import.cpython-39.pyc  /no git sync
 │   │       └── arp_table.cpython-39.pyc            /no git sync
 │   ├── hosts
