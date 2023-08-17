@@ -17,15 +17,17 @@ and btw, it's black and green because I like black and green ;-)
 ---
 
 **Thing's done :**
-- basic index webpage on port 7777 with links to subpages
-- basic subpages with backlink to main
-- basic arpwatch import page (arp_arpwatch_import.html & arp_arpwatch_import.py)
-    - basic import of a file working and saved to data/import/arpwatch_import_YYMMDD.csv with ";" as delemiter
-- basic "arp-table" page
+- index webpage on port 7777 with links to subpages
+- subpages with backlink to main
+- import page (arp_arpwatch_import.html & arp_arpwatch_import.py)
+    - import of a arpwatch file working and saved to data/import/arpwatch_import_YYMMDD.csv with ";" as delemiter
+- "arp-table" page
     - if not exist, automatic creation of net-alarm/data/arp_data.csv
     - automatic import of latest : net-alarm/data/arpwatch/arpwatch_YYDDMM file, 
         - compare and import if needed to net-alarm/data/arp_data.csv
     - present result in sortable table
+        - table is sorted by IP on load
+        - table / hostname is editable, changes saved on "change focus" to net-alarm/data/arp_data.csv
 - CSS file generation to support themes in the future ;-)
 
 ---
