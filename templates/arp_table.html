@@ -4,42 +4,42 @@
     <title>ARP Table</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <script>
-        function sortTable(n) {
-            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("arpTable");
-            switching = true;
-            dir = "asc";
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-                    if (dir == "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (dir == "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
+    function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("arpTableBody");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 0; i < (rows.length - 1); i++) {  // Adjusted the starting index to 0
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
                 }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchcount++;
-                } else {
-                    if (switchcount == 0 && dir == "asc") {
-                        dir = "desc";
-                        switching = true;
-                    }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
                 }
             }
         }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
     </script>
 </head>
 <body>
@@ -49,28 +49,34 @@
             <td class="left"><h1>ARP OVERVIEW</h1></td>
         </tr>
     </table>
-    <table id="arpTable">
-        <thead>
-            <tr>
-                <th onclick="sortTable(0)">ARP address</th>
-                <th onclick="sortTable(1)">IP address</th>
-                <th onclick="sortTable(2)">Date</th>
-                <th onclick="sortTable(3)">Hostname</th>
-                <th onclick="sortTable(4)">Interface</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in arp_data %}
-            <tr>
-                <td>{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-                <td>{{ row[2] }}</td>
-                <td>{{ row[3] }}</td>
-                <td>{{ row[4] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table id="arpTableHeader">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">ARP address</th>
+                    <th onclick="sortTable(1)">IP address</th>
+                    <th onclick="sortTable(2)">Last seen</th>
+                    <th onclick="sortTable(3)">Hostname</th>
+                    <th onclick="sortTable(4)">Interface</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="scrollable-tbody">
+            <table id="arpTableBody">
+                <tbody>
+                    {% for row in arp_data %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="line"></div>
     <div class="footer">
         <p><a href="javascript:history.back()">Go back</a></p>
