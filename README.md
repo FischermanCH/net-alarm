@@ -87,6 +87,8 @@ net-alarm
 │   ├── lan
 │   └── tcpip
 ├── static
+│   ├── css
+│   │   └── styles.css
 │   └── images
 │       └── icon_placeholder.png
 └── templates
