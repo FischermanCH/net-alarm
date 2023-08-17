@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>net-alarm - MAC Address Overview</title>
+    <title>ARP Table</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
@@ -13,7 +13,6 @@
             <td class="left"><h1>MAC/ARP</h1></td>
         </tr>
     </table>
-
     <table id="arpTableHeader" style="width: 70%; margin: auto;">
         <thead>
             <tr>
@@ -28,7 +27,6 @@
     <div class="scrollable-tbody">
         <table id="arpTableBody" style="width: 70%; margin: auto;">
             <tbody>
-                <!-- Data from arp_data.csv will be populated here -->
                 {% for row in arp_data %}
                 <tr>
                     <td>{{ row[0] }}</td>
@@ -41,8 +39,12 @@
             </tbody>
         </table>
     </div>
-
+    <div class="line"></div>
+    <div class="footer">
+        <p><a href="javascript:history.back()">Go back</a></p>
+    </div>
     <script>
+        // Sorting function
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById("arpTableBody");
@@ -80,23 +82,22 @@
             }
         }
 
+        // Update hostname function
         function updateHostname(cell, macAddress, ipAddress) {
             var newHostname = cell.innerText;
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/update_hostname", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("macAddress=" + encodeURIComponent(macAddress) + "&ipAddress=" + encodeURIComponent(ipAddress) + "&hostname=" + encodeURIComponent(newHostname));
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify({
+                macAddress: macAddress,
+                ipAddress: ipAddress,
+                hostname: newHostname
+            }));
         }
-
         // Sort by IP address by default on page load
         window.onload = function() {
             sortTable(1);
-        };
+        };  
     </script>
-
-    <div class="line"></div>
-    <div class="footer">
-        <p><a href="javascript:history.back()">Go back</a></p>
-    </div>
 </body>
 </html>
