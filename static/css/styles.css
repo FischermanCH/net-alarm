@@ -73,7 +73,7 @@ th {
     cursor: pointer;
 }
 .known-yes {
-    color: green; /* or any color you prefer for 'Yes' */
+    color: #ffcc00; /* or any color you prefer for 'Yes' */
     cursor: pointer;
 }
 

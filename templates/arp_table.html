@@ -34,8 +34,8 @@
                     <td>{{ row[2] }}</td>
                     <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
                     <td>
-                        <span class="known-option" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'Yes')">Yes</span> /
-                        <span class="known-option" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'No')">No</span>
+                        <span class="known-option {{ 'known-yes' if row[5] == 'Yes' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'Yes')">Yes</span> /
+                        <span class="known-option {{ 'known-no' if row[5] == 'No' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'No')">No</span>
                     </td>
                 </tr>
                 {% endfor %}

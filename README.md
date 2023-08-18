@@ -28,6 +28,8 @@ and btw, it's black and green because I like black and green ;-)
     - present result in sortable table
         - table is sorted by IP on load
         - table / hostname is editable, changes saved on "change focus" to net-alarm/data/arp_data.csv
+        - adding column for "known" MAC addresses, clickable "Yes / No" with additional colum entry in net-alarm/data/arp_data.csv
+            - still need some adjustement as its only visible if page reload
 - CSS file generation to support themes in the future ;-)
 
 ---
@@ -37,7 +39,6 @@ GENERIC
 - ...
 - ...
 ARP
-- adding column for "known" MAC addresses
 - generate arpwatch configure and start page
 - replace "edit actual arp-file" with arpwatch-config and use "show actual arp-file" as main arp-show and manipulate page
 TCP
