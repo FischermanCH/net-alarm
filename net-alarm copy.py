@@ -75,33 +75,5 @@ def update_hostname():
 
     return jsonify(success=True)
 
-@app.route('/update_known', methods=['POST'])
-def update_known():
-    data = request.json
-    mac_address = data['macAddress']
-    ip_address = data['ipAddress']
-    known_value = data['known']
-
-    # Path to the arp_data.csv file
-    file_path = os.path.join("data", "arp_data.csv")
-
-    # Read the CSV file and update the known value
-    with open(file_path, 'r') as file:
-        rows = list(csv.reader(file, delimiter=';'))
-
-    for row in rows:
-        if row[0] == mac_address and row[1] == ip_address:
-            while len(row) < 6:
-                row.append('')
-            row[5] = known_value
-            break
-
-    # Write the updated data back to the CSV file
-    with open(file_path, 'w', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerows(rows)
-
-    return jsonify(success=True)
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)

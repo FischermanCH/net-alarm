@@ -37,6 +37,7 @@ GENERIC
 - ...
 - ...
 ARP
+- adding column for "known" MAC addresses
 - generate arpwatch configure and start page
 - replace "edit actual arp-file" with arpwatch-config and use "show actual arp-file" as main arp-show and manipulate page
 TCP

@@ -20,7 +20,7 @@
                 <th onclick="sortTable(1)">IP address</th>
                 <th onclick="sortTable(2)">Date</th>
                 <th onclick="sortTable(3)">Hostname</th>
-                <th>Known</th>
+                <th onclick="sortTable(4)">Interface</th>
             </tr>
         </thead>
     </table>
@@ -33,10 +33,7 @@
                     <td>{{ row[1] }}</td>
                     <td>{{ row[2] }}</td>
                     <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
-                    <td>
-                        <span class="known-option" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'Yes')">Yes</span> /
-                        <span class="known-option" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'No')">No</span>
-                    </td>
+                    <td>{{ row[4] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -87,32 +84,20 @@
 
         // Update hostname function
         function updateHostname(cell, macAddress, ipAddress) {
+            var newHostname = cell.innerText;
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/update_hostname", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.send(JSON.stringify({
                 macAddress: macAddress,
                 ipAddress: ipAddress,
-                hostname: cell.innerText
+                hostname: newHostname
             }));
         }
-
-        // Update Known function
-        function updateKnown(cell, macAddress, ipAddress, value) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/update_known", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.send(JSON.stringify({
-                macAddress: macAddress,
-                ipAddress: ipAddress,
-                known: value
-            }));
-        }
-
         // Sort by IP address by default on page load
         window.onload = function() {
             sortTable(1);
-        };
+        };  
     </script>
 </body>
 </html>

@@ -68,6 +68,20 @@ th {
 }
 
 /* arp_table.html/arpTable */
+
+.known-option {
+    cursor: pointer;
+}
+.known-yes {
+    color: green; /* or any color you prefer for 'Yes' */
+    cursor: pointer;
+}
+
+.known-no {
+    color: red; /* or any color you prefer for 'No' */
+    cursor: pointer;
+}
+
 .table-container {
     width: 70%;
     margin: auto;
