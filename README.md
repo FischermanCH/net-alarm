@@ -66,11 +66,13 @@ MAIN PAGE
 
 ---
 ## Installation :
+```
 ### Prerequisites:
 1.) A system with Python 3.6 or higher installed.
 2-) pip (Python package installer) should be installed.
 3.) Git installed (for cloning the repository).
-arpwatch sourcefile 
+4.) arpwatch sourcefile 
+```
 ### Steps:
 1.) Clone the Repository:
 Open a terminal or command prompt and run:
