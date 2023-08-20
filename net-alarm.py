@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import csv
 import os
+# Importing the function from the arp_arpwatch_import script
+from scripts.arp.arp_arpwatch_import import import_arp_file
 
 app = Flask(__name__)
 

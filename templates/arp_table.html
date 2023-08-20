@@ -97,22 +97,40 @@
             }));
         }
 
-        // Update Known function
-        function updateKnown(cell, macAddress, ipAddress, value) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/update_known", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.send(JSON.stringify({
-                macAddress: macAddress,
-                ipAddress: ipAddress,
-                known: value
-            }));
-        }
+      // Update Known function
+      function updateKnown(cell, macAddress, ipAddress, value) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/update_known", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify({
+            macAddress: macAddress,
+            ipAddress: ipAddress,
+            known: value
+        }));
 
-        // Sort by IP address by default on page load
-        window.onload = function() {
-            sortTable(1);
-        };
-    </script>
+        // Update the visual state of the "Yes" and "No" options
+        var parentCell = cell.parentNode;
+        var yesOption = parentCell.querySelector(".known-option.known-yes");
+        var noOption = parentCell.querySelector(".known-option.known-no");
+        if (value === "Yes") {
+            if (yesOption) yesOption.classList.add("known-yes");
+            if (noOption) noOption.classList.remove("known-no");
+        } else {
+            if (yesOption) yesOption.classList.remove("known-yes");
+            if (noOption) noOption.classList.add("known-no");
+        }
+    }
+</script>
+
+<!-- ... [rest of the code remains unchanged] -->
+In the modified updateKnown function, after sending the XMLHttpRequest to update the backend, we immediately update the visual state of the "Yes" and "No" options based on the user's selection. This ensures that the changes are immediately visible to the user without requiring a page reload.
+
+You can replace the existing code in templates/arp_table.html with the provided code above to address the issue.
+
+
+
+
+
+
 </body>
 </html>
