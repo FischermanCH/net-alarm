@@ -65,48 +65,6 @@ MAIN PAGE
 - time since last update 
 
 ---
-
-File structure 
-```
-net-alarm
-/home/fischerman/net-alarm/net-alarm
-├── data
-│   ├── arp_data.csv
-│   ├── arpwatch
-│   │   ├── arpwatch_2308110108                     no git-sync
-│   │   ├── arpwatch_2308110108-                    no git-sync
-│   │   ├── arpwatch_output_2308110108.log          no git-sync
-│   │   └── testfile.txt
-│   ├── export
-│   └── import
-│       ├── arpwatch_import_230816.csv              no git-sync
-│       └── arpwatch_import_230817.csv              no git-sync
-├── net-alarm.py
-├── README.md
-├── scripts
-│   ├── arp
-│   │   ├── arp_arpwatch_import.py
-│   │   ├── arp_table.py
-│   │   └── __pycache__
-│   │       ├── arp_arpwatch_import.cpython-39.pyc  no git-sync
-│   │       └── arp_table.cpython-39.pyc            no git-sync
-│   ├── hosts
-│   ├── lan
-│   └── tcpip
-├── static
-│   ├── css
-│   │   └── styles.css
-│   └── images
-│       └── icon_placeholder.png
-└── templates
-    ├── arp_arpwatch_import.html
-    ├── arp_page.html
-    ├── arp_table.html
-    ├── host_page.html
-    ├── index.html
-    ├── lan_page.html
-    └── tcpip_page.html
-```
 ## Installation :
 ### Prerequisites:
 1.) A system with Python 3.6 or higher installed.
@@ -162,13 +120,45 @@ Or,
 #### Missing Dependencies: 
 Ensure you've activated the virtual environment and installed all the required packages using pip.
 
-
-
-
-
-
-
-
-
-
+---
+## File structure 
+```
+net-alarm
+/home/fischerman/net-alarm/net-alarm
+├── data
+│   ├── arp_data.csv
+│   ├── arpwatch
+│   │   ├── arpwatch_2308110108                     no git-sync
+│   │   ├── arpwatch_2308110108-                    no git-sync
+│   │   ├── arpwatch_output_2308110108.log          no git-sync
+│   │   └── testfile.txt
+│   ├── export
+│   └── import
+│       ├── arpwatch_import_230816.csv              no git-sync
+│       └── arpwatch_import_230817.csv              no git-sync
+├── net-alarm.py
+├── README.md
+├── scripts
+│   ├── arp
+│   │   ├── arp_arpwatch_import.py
+│   │   ├── arp_table.py
+│   │   └── __pycache__
+│   │       ├── arp_arpwatch_import.cpython-39.pyc  no git-sync
+│   │       └── arp_table.cpython-39.pyc            no git-sync
+│   ├── hosts
+│   ├── lan
+│   └── tcpip
+├── static
+│   ├── css
+│   │   └── styles.css
+│   └── images
+│       └── icon_placeholder.png
+└── templates
+    ├── arp_arpwatch_import.html
+    ├── arp_page.html
+    ├── arp_table.html
+    ├── host_page.html
+    ├── index.html
+    ├── lan_page.html
+    └── tcpip_page.html
 ```
