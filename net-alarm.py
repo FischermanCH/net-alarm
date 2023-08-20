@@ -3,6 +3,8 @@ import csv
 import os
 # Importing the function from the arp_arpwatch_import script
 from scripts.arp.arp_arpwatch_import import import_arp_file
+# Importing the function from the arp_arpwatch_config script
+from scripts.arp.arp_arpwatch_config import save_config_to_file
 
 app = Flask(__name__)
 
@@ -24,8 +26,22 @@ def index():
 def arp_page():
     return render_template('arp_page.html')
 
-@app.route('/arp_arpwatch_config')
+@app.route('/arp_arpwatch_config', methods=['GET', 'POST'])
 def arp_arpwatch_config():
+    if request.method == 'POST':
+        form_data = {
+            'debug': request.form.get('debug'),
+            'file': request.form.get('file'),
+            'interface': request.form.get('interface'),
+            'network': request.form.get('network'),
+            'disableBogon': request.form.get('disableBogon'),
+            'readFile': request.form.get('readFile'),
+            'dropPrivileges': request.form.get('dropPrivileges'),
+            'emailRecipient': request.form.get('emailRecipient'),
+            'emailSender': request.form.get('emailSender')
+        }
+        config_file_path = os.path.join("static", "config", "arpwatch.conf")
+        save_config_to_file(form_data, config_file_path)
     return render_template('arp_arpwatch_config.html')
 
 @app.route('/tcpip_page')
