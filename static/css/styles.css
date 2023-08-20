@@ -86,6 +86,10 @@ th {
     color: red; /* Color for 'No' when selected */
 }
 
+.not-known {
+    color: red; /* Color for entire row when 'No' is selected */
+}
+
 .table-container {
     width: 70%;
     margin: auto;
