@@ -29,16 +29,17 @@
             <tbody>
                 {% for row in arp_data %}
                 <tr class="{{ 'not-known' if row[5] == 'No' else '' }}">
-                     <td>{{ row[0] }}</td>
-                      <td>{{ row[1] }}</td>
-                       <td>{{ row[2] }}</td>
-                        <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
-                        <td>
-        <span class="known-option known-yes {{ 'selected' if row[5] == 'Yes' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'Yes')">Yes</span> /
-        <span class="known-option known-no {{ 'selected' if row[5] == 'No' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'No')">No</span>
-    </td>
-</tr>
-{% endfor %}
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
+                    <td>
+                        <span class="known-option known-yes {{ 'selected' if row[5] == 'Yes' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'Yes')">Yes</span> /
+                        <span class="known-option known-no {{ 'selected' if row[5] == 'No' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'No')">No</span>
+                    </td>
+                </tr>
+                {% endfor %}
+                
 
             </tbody>
         </table>
