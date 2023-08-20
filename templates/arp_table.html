@@ -20,7 +20,7 @@
                 <th onclick="sortTable(1)">IP address</th>
                 <th onclick="sortTable(2)">First seen</th>
                 <th onclick="sortTable(3)">Hostname</th>
-                <th onclick="sortTable(4)">Known</th>
+                <th id="knownHeader" onclick="sortTable(4)">Known</th>
             </tr>
         </thead>
     </table>
@@ -147,9 +147,9 @@
          // Call the sortTable function for the "Known" column on page load
          window.onload = function() {
             dir = "asc";  // Set initial sorting direction to "asc"
-            sortTable(4);
+            sortTable(2);
         };
 
-</script>
+    </script>
 </body>
 </html>
