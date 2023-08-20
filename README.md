@@ -107,3 +107,68 @@ net-alarm
     ├── lan_page.html
     └── tcpip_page.html
 ```
+## Installation :
+### Prerequisites:
+1.) A system with Python 3.6 or higher installed.
+2-) pip (Python package installer) should be installed.
+3.) Git installed (for cloning the repository).
+arpwatch sourcefile 
+### Steps:
+1.) Clone the Repository:
+Open a terminal or command prompt and run:
+```
+git clone https://github.com/FischermanCH/net-alarm.git
+```
+2.) Navigate to the Project Directory:
+```
+cd net-alarm
+```
+3.) Set Up a Virtual Environment (Optional but Recommended):
+It's a good practice to use a virtual environment to avoid potential conflicts with other Python packages.
+```
+python3 -m venv venv
+source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+```
+4.) Install Required Packages:
+```
+pip install Flask
+```
+5.) Run the Application:
+```
+python3 net-alarm.py
+```
+Access the Application:
+Open a web browser and navigate to:
+```
+http://127.0.0.1:7777/
+```
+or
+```
+http://SERVER-IP-ADDRESS:7777/
+```
+### Usage:
+
+- Home Page: Access the main dashboard by navigating to the root URL.
+- ARP Page: View and manage ARP data by navigating to /arp_page.
+- Import ARP Data: You can import ARP data by navigating to /arp_arpwatch_import and uploading the appropriate ARP data file.
+- View ARP Table: To view the ARP table, navigate to /arp_table.
+
+#### Troubleshooting:
+- Port Already in Use: If you see an error that the port 7777 is already in use, you can either:
+    - Stop the other service using that port.
+Or, 
+    - modify the net-alarm.py file to use a different port by changing the line app.run(host='0.0.0.0', port=7777) to a different port number, like port=8888.
+
+#### Missing Dependencies: 
+Ensure you've activated the virtual environment and installed all the required packages using pip.
+
+
+
+
+
+
+
+
+
+
+```
