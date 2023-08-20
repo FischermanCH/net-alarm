@@ -66,8 +66,8 @@ MAIN PAGE
 
 ---
 ## Installation :
-```
 ### Prerequisites:
+```
 1.) A system with Python 3.6 or higher installed.
 2-) pip (Python package installer) should be installed.
 3.) Git installed (for cloning the repository).
