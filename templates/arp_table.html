@@ -97,8 +97,8 @@
             }));
         }
 
-      // Update Known function
-      function updateKnown(cell, macAddress, ipAddress, value) {
+  // Update Known function
+  function updateKnown(cell, macAddress, ipAddress, value) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/update_known", true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -113,24 +113,13 @@
         var yesOption = parentCell.querySelector(".known-option.known-yes");
         var noOption = parentCell.querySelector(".known-option.known-no");
         if (value === "Yes") {
-            if (yesOption) yesOption.classList.add("known-yes");
-            if (noOption) noOption.classList.remove("known-no");
+            yesOption.classList.add("selected");
+            noOption.classList.remove("selected");
         } else {
-            if (yesOption) yesOption.classList.remove("known-yes");
-            if (noOption) noOption.classList.add("known-no");
+            yesOption.classList.remove("selected");
+            noOption.classList.add("selected");
         }
     }
 </script>
-
-<!-- ... [rest of the code remains unchanged] -->
-In the modified updateKnown function, after sending the XMLHttpRequest to update the backend, we immediately update the visual state of the "Yes" and "No" options based on the user's selection. This ensures that the changes are immediately visible to the user without requiring a page reload.
-
-You can replace the existing code in templates/arp_table.html with the provided code above to address the issue.
-
-
-
-
-
-
 </body>
 </html>

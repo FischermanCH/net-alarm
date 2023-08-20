@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     background-color: black;
     color: #00ff00;
@@ -6,17 +7,30 @@ body {
     flex-direction: column;
     align-items: center;
 }
-/* For the header */
+
+a {
+    color: #00ff00;
+    text-decoration: none;
+}
+
+.line {
+    width: 80%;
+    border-bottom: 1px solid #00ff00;
+    margin: 20px 0;
+}
+
+/* Header Styles */
 table h1 {
     color: #00FF00;
 }
 
-/* For the footer */
+/* Footer Styles */
 .footer {
     cursor: pointer;
     border: 1px solid #003300;
     text-align: center;
     padding: 5px;
+    margin-top: 20px;
 }
 
 .footer p {
@@ -25,11 +39,7 @@ table h1 {
     text-decoration: none;
 }
 
-a {
-    color: #00ff00;
-    text-decoration: none;
-}
-
+/* Table Styles */
 table {
     margin-top: 20px;
     border-collapse: collapse;
@@ -52,48 +62,42 @@ td.right {
     text-align: right;
 }
 
-.line {
-    width: 80%;
-    border-bottom: 1px solid #00ff00;
-    margin: 20px 0;
-}
-
-.footer {
-    margin-top: 20px;
-}
-
 th {
     background-color: #333333;
     cursor: pointer;
 }
 
-/* arp_table.html/arpTable */
-
+/* arp_table.html/arpTable Styles */
 .known-option {
     cursor: pointer;
 }
-.known-yes {
-    color: #ffcc00; /* or any color you prefer for 'Yes' */
+
+.known-yes,
+.known-no {
+    color: #00ff00; /* Default color */
     cursor: pointer;
 }
 
-.known-no {
-    color: red; /* or any color you prefer for 'No' */
-    cursor: pointer;
+.known-yes.selected {
+    color: #ffcc00; /* Color for 'Yes' when selected */
+}
+
+.known-no.selected {
+    color: red; /* Color for 'No' when selected */
 }
 
 .table-container {
     width: 70%;
     margin: auto;
 }
-#arpTableHeader th, #arpTableBody td {
+
+#arpTableHeader th, 
+#arpTableBody td {
     text-align: left;
 }
 
-
-
 .scrollable-tbody {
-    max-height: 410px; /* Adjust this value based on your preference */
+    max-height: 410px;
     overflow-y: auto;
     border-collapse: collapse;
 }
@@ -120,26 +124,27 @@ th {
     background-color: #000000;
 }
 
-#arpTableHeader th:nth-child(1), #arpTableBody td:nth-child(1) { 
+#arpTableHeader th:nth-child(1), 
+#arpTableBody td:nth-child(1) { 
     width: 20%; 
 }
 
-#arpTableHeader th:nth-child(2), #arpTableBody td:nth-child(2) { 
+#arpTableHeader th:nth-child(2), 
+#arpTableBody td:nth-child(2) { 
     width: 15%; 
 }
 
-#arpTableHeader th:nth-child(3), #arpTableBody td:nth-child(3) { 
+#arpTableHeader th:nth-child(3), 
+#arpTableBody td:nth-child(3) { 
     width: 20%; 
 }
 
-#arpTableHeader th:nth-child(4), #arpTableBody td:nth-child(4) { 
+#arpTableHeader th:nth-child(4), 
+#arpTableBody td:nth-child(4) { 
     width: 30%; 
 }
 
-#arpTableHeader th:nth-child(5), #arpTableBody td:nth-child(5) { 
+#arpTableHeader th:nth-child(5), 
+#arpTableBody td:nth-child(5) { 
     width: 15%; 
 }
-
-
-
-
