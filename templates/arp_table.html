@@ -13,19 +13,19 @@
             <td class="left"><h1>MAC/ARP Overview</h1></td>
         </tr>
     </table>
-    <table id="arpTableHeader" style="width: 70%; margin: auto;">
+    <table id="arpTableHeader" style="width: 90%; margin: auto;">
         <thead>
             <tr>
                 <th onclick="sortTable(0)">ARP address</th>
                 <th onclick="sortTable(1)">IP address</th>
-                <th onclick="sortTable(2)">Last seen</th>
+                <th onclick="sortTable(2)">First seen</th>
                 <th onclick="sortTable(3)">Hostname</th>
                 <th>Known</th>
             </tr>
         </thead>
     </table>
     <div class="scrollable-tbody">
-        <table id="arpTableBody" style="width: 70%; margin: auto;">
+        <table id="arpTableBody" style="width: 90%; margin: auto;">
             <tbody>
                 {% for row in arp_data %}
                 <tr class="{{ 'not-known' if row[5] == 'No' else '' }}">
@@ -48,43 +48,57 @@
         <p><a href="javascript:history.back()">Go back</a></p>
     </div>
     <script>
-        // Sorting function
-        function sortTable(n) {
-            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("arpTableBody");
-            switching = true;
-            dir = "asc";
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (i = 0; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-                    if (dir == "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (dir == "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
+// Sorting function
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("arpTableBody");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (n === 4) { // If sorting by the "Known" column
+                if (dir == "asc") {
+                    if (x.innerText === "No" && y.innerText === "Yes") {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerText === "Yes" && y.innerText === "No") {
+                        shouldSwitch = true;
+                        break;
                     }
                 }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchcount++;
-                } else {
-                    if (switchcount == 0 && dir == "asc") {
-                        dir = "desc";
-                        switching = true;
+            } else {
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
                     }
                 }
             }
         }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
 
         // Update hostname function
         function updateHostname(cell, macAddress, ipAddress) {

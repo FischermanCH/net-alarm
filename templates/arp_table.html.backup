@@ -13,32 +13,33 @@
             <td class="left"><h1>MAC/ARP Overview</h1></td>
         </tr>
     </table>
-    <table id="arpTableHeader" style="width: 70%; margin: auto;">
+    <table id="arpTableHeader" style="width: 90%; margin: auto;">
         <thead>
             <tr>
                 <th onclick="sortTable(0)">ARP address</th>
                 <th onclick="sortTable(1)">IP address</th>
-                <th onclick="sortTable(2)">Last seen</th>
+                <th onclick="sortTable(2)">First seen</th>
                 <th onclick="sortTable(3)">Hostname</th>
                 <th>Known</th>
             </tr>
         </thead>
     </table>
     <div class="scrollable-tbody">
-        <table id="arpTableBody" style="width: 70%; margin: auto;">
+        <table id="arpTableBody" style="width: 90%; margin: auto;">
             <tbody>
                 {% for row in arp_data %}
-                <tr>
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
-                    <td>
-                        <span class="known-option {{ 'known-yes' if row[5] == 'Yes' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'Yes')">Yes</span> /
-                        <span class="known-option {{ 'known-no' if row[5] == 'No' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'No')">No</span>
-                    </td>
-                </tr>
-                {% endfor %}
+                <tr class="{{ 'not-known' if row[5] == 'No' else '' }}">
+                     <td>{{ row[0] }}</td>
+                      <td>{{ row[1] }}</td>
+                       <td>{{ row[2] }}</td>
+                        <td contenteditable="true" onblur="updateHostname(this, '{{ row[0] }}', '{{ row[1] }}')">{{ row[3] }}</td>
+                        <td>
+        <span class="known-option known-yes {{ 'selected' if row[5] == 'Yes' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'Yes')">Yes</span> /
+        <span class="known-option known-no {{ 'selected' if row[5] == 'No' else '' }}" onclick="updateKnown(this, '{{ row[0] }}', '{{ row[1] }}', 'No')">No</span>
+    </td>
+</tr>
+{% endfor %}
+
             </tbody>
         </table>
     </div>
@@ -97,22 +98,37 @@
             }));
         }
 
-        // Update Known function
-        function updateKnown(cell, macAddress, ipAddress, value) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/update_known", true);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.send(JSON.stringify({
-                macAddress: macAddress,
-                ipAddress: ipAddress,
-                known: value
-            }));
+   // Update Known function
+   function updateKnown(cell, macAddress, ipAddress, value) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/update_known", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify({
+            macAddress: macAddress,
+            ipAddress: ipAddress,
+            known: value
+        }));
+
+        // Update the visual state of the "Yes" and "No" options
+        var parentCell = cell.parentNode;
+        var yesOption = parentCell.querySelector(".known-yes");
+        var noOption = parentCell.querySelector(".known-no");
+        if (value === "Yes") {
+            yesOption.classList.add("selected");
+            noOption.classList.remove("selected");
+        } else {
+            yesOption.classList.remove("selected");
+            noOption.classList.add("selected");
         }
 
-        // Sort by IP address by default on page load
-        window.onload = function() {
-            sortTable(1);
-        };
-    </script>
+        // Update the font color of the entire row based on the "Known Yes/No" value
+        var parentRow = parentCell.parentNode;
+        if (value === "No") {
+            parentRow.classList.add("not-known");
+        } else {
+            parentRow.classList.remove("not-known");
+        }
+    }
+</script>
 </body>
 </html>
