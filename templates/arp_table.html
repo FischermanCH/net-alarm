@@ -143,6 +143,10 @@
             } else {
                 parentRow.classList.remove("not-known");
             }
+            // Call the sortTable function for the "Known" column on page load
+            window.onload = function() {
+                sortTable(4);
+             };
         }
     </script>
 </body>
