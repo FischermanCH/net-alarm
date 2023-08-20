@@ -24,6 +24,10 @@ def index():
 def arp_page():
     return render_template('arp_page.html')
 
+@app.route('/arp_arpwatch_config')
+def arp_arpwatch_config():
+    return render_template('arp_arpwatch_config.html')
+
 @app.route('/tcpip_page')
 def tcpip_page():
     return render_template('tcpip_page.html')

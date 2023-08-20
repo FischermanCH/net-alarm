@@ -18,9 +18,9 @@
             <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
         </tr>
         <tr>
-            <td class="right"><a href="javascript:void(0);" class="middle" onclick="editPlaceholderAlert();">arpwatch config</a></td>
+            <td class="right"><a href="{{ url_for('arp_arpwatch_config') }}" class="middle">arpwatch config</a></td>
             <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
-        </tr>
+        </tr>        
         <tr>
             <td class="right"><a href="{{ url_for('arp_arpwatch_import') }}" class="middle">File Import</a></td>
             <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
