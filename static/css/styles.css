@@ -74,7 +74,7 @@ th {
 
 .known-yes,
 .known-no {
-    color: #00ff00; /* Default color */
+    color: #66ff66; /* Lighter shade of green for default state */
     cursor: pointer;
 }
 

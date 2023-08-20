@@ -97,29 +97,30 @@
             }));
         }
 
-  // Update Known function
-  function updateKnown(cell, macAddress, ipAddress, value) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/update_known", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify({
-            macAddress: macAddress,
-            ipAddress: ipAddress,
-            known: value
-        }));
+// Update Known function
+function updateKnown(cell, macAddress, ipAddress, value) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/update_known", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify({
+        macAddress: macAddress,
+        ipAddress: ipAddress,
+        known: value
+    }));
 
-        // Update the visual state of the "Yes" and "No" options
-        var parentCell = cell.parentNode;
-        var yesOption = parentCell.querySelector(".known-option.known-yes");
-        var noOption = parentCell.querySelector(".known-option.known-no");
-        if (value === "Yes") {
-            yesOption.classList.add("selected");
-            noOption.classList.remove("selected");
-        } else {
-            yesOption.classList.remove("selected");
-            noOption.classList.add("selected");
-        }
+    // Update the visual state of the "Yes" and "No" options
+    var parentCell = cell.parentNode;
+    var yesOption = parentCell.querySelector(".known-yes");
+    var noOption = parentCell.querySelector(".known-no");
+    if (value === "Yes") {
+        yesOption.classList.add("selected");
+        noOption.classList.remove("selected");
+    } else {
+        yesOption.classList.remove("selected");
+        noOption.classList.add("selected");
     }
+}
+
 </script>
 </body>
 </html>
