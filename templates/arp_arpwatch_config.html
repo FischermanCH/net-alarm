@@ -14,7 +14,56 @@
     <div class="line"></div>
     <div class="content">
         <h2>Arpwatch Config</h2>
-        <p>This page is a placeholder for the arpwatch config. Implementation will be added soon.</p>
+        <form id="arpwatchConfigForm">
+            <!-- Debug mode option -->
+            <label for="debug">Debug Mode:</label>
+            <input type="checkbox" id="debug" name="debug">
+            <br><br>
+
+            <!-- Data File option -->
+            <label for="file">Data File:</label>
+            <input type="text" id="file" name="file" placeholder="e.g. arp.dat">
+            <br><br>
+
+            <!-- Interface option -->
+            <label for="interface">Interface:</label>
+            <input type="text" id="interface" name="interface" placeholder="e.g. eth0">
+            <br><br>
+
+            <!-- Additional local networks option -->
+            <label for="network">Additional Local Networks:</label>
+            <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24">
+            <br><br>
+
+            <!-- Disable bogon reporting option -->
+            <label for="disableBogon">Disable Bogon Reporting:</label>
+            <input type="checkbox" id="disableBogon" name="disableBogon">
+            <br><br>
+
+            <!-- Read packets from file option -->
+            <label for="readFile">Read packets from file:</label>
+            <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file">
+            <br><br>
+
+            <!-- Drop root privileges option -->
+            <label for="dropPrivileges">Drop Root and Change to User:</label>
+            <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser">
+            <br><br>
+
+            <!-- Email recipient option -->
+            <label for="emailRecipient">Email Recipient:</label>
+            <input type="text" id="emailRecipient" name="emailRecipient" placeholder="e.g. admin@example.com">
+            <br><br>
+
+            <!-- Email sender option -->
+            <label for="emailSender">Email Sender:</label>
+            <input type="text" id="emailSender" name="emailSender" placeholder="e.g. arpwatch@example.com">
+            <br><br>
+
+            <input type="submit" value="Save Configuration">
+        </form>
+        <br>
+        <button id="runArpwatch">RUN local arpwatch</button>
     </div>
     <div class="line"></div>
     <div class="footer">
