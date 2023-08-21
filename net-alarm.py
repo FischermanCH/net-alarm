@@ -22,6 +22,26 @@ def get_arp_table_data():
 def parse_config(config_data):
     config = configparser.ConfigParser()
     config.read_string(config_data)
+    
+    # Ensure all sections and keys are present
+    default_config = {
+        'Debug': {'Mode': 'False'},
+        'File': {'DataFile': ''},
+        'Interface': {'Name': ''},
+        'Network': {'AdditionalLocalNetworks': ''},
+        'Bogon': {'DisableReporting': 'False'},
+        'Packet': {'ReadFromFile': ''},
+        'Privileges': {'DropRootAndChangeToUser': ''},
+        'Email': {'Recipient': '', 'Sender': ''}
+    }
+    
+    for section, keys in default_config.items():
+        if not config.has_section(section):
+            config.add_section(section)
+        for key, default_value in keys.items():
+            if not config.has_option(section, key):
+                config.set(section, key, default_value)
+    
     return config
 
 @app.route('/')
