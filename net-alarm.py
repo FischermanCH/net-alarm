@@ -57,23 +57,22 @@ def arp_arpwatch_config():
     config_file_path = os.path.join("static", "config", "arpwatch.conf")
     if request.method == 'POST':
         form_data = {
-            'debug': request.form.get('debug'),
-            'file': request.form.get('file'),
-            'interface': request.form.get('interface'),
-            'network': request.form.get('network'),
-            'disableBogon': request.form.get('disableBogon'),
-            'readFile': request.form.get('readFile'),
-            'dropPrivileges': request.form.get('dropPrivileges'),
-            'emailRecipient': request.form.get('emailRecipient'),
-            'emailSender': request.form.get('emailSender')
+            'Debug': {'Mode': request.form.get('debug')},
+            'File': {'DataFile': request.form.get('file')},
+            'Interface': {'Name': request.form.get('interface')},
+            'Network': {'AdditionalLocalNetworks': request.form.get('network')},
+            'Bogon': {'DisableReporting': request.form.get('disableBogon')},
+            'Packet': {'ReadFromFile': request.form.get('readFile')},
+            'Privileges': {'DropRootAndChangeToUser': request.form.get('dropPrivileges')},
+            'Email': {'Recipient': request.form.get('emailRecipient'), 'Sender': request.form.get('emailSender')}
         }
         save_config_to_file(form_data, config_file_path)
-        return render_template('arp_arpwatch_config.html', config=form_data)
+        config = form_data
     else:
         with open(config_file_path, 'r') as f:
             config_data = f.read()
         config = parse_config(config_data)
-        return render_template('arp_arpwatch_config.html', config=config)
+    return render_template('arp_arpwatch_config.html', config=config)
 
 @app.route('/tcpip_page')
 def tcpip_page():
