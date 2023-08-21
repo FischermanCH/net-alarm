@@ -1,5 +1,4 @@
-## Python Application
-# Webbased Network Inventory/Alarming based on arpwatch & nmap
+## Webbased Network Inventory/Alarming based on arpwatch & nmap
 # (by Fischerman.ch and Friend's)
 
 Goal is to create a web-based network inventory/alarming for small/home LAN's.
