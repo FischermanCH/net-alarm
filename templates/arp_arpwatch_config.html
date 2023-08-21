@@ -32,22 +32,22 @@
 
             <!-- Additional local networks option -->
             <label for="network">Additional Local Networks:</label>
-            <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24" value="{{ config['Network']['Additional'] }}">
+            <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24" value="{{ config['Network']['AdditionalLocalNetworks'] }}">
             <br><br>
 
             <!-- Disable bogon reporting option -->
             <label for="disableBogon">Disable Bogon Reporting:</label>
-            <input type="checkbox" id="disableBogon" name="disableBogon" {% if config['Bogon']['Disable'] == 'True' %}checked{% endif %}>
+            <input type="checkbox" id="disableBogon" name="disableBogon" {% if config['Bogon']['DisableReporting'] == 'True' %}checked{% endif %}>
             <br><br>
 
             <!-- Read packets from file option -->
             <label for="readFile">Read packets from file:</label>
-            <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file" value="{{ config['ReadFile']['Path'] }}">
+            <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file" value="{{ config['Packet']['ReadFromFile'] }}">
             <br><br>
 
             <!-- Drop root privileges option -->
             <label for="dropPrivileges">Drop Root and Change to User:</label>
-            <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser" value="{{ config['Privileges']['Drop'] }}">
+            <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser" value="{{ config['Privileges']['DropRootAndChangeToUser'] }}">
             <br><br>
 
             <!-- Email recipient option -->
