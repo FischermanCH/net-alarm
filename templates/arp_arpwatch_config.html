@@ -17,7 +17,7 @@
         <form id="arpwatchConfigForm" action="/arp_arpwatch_config" method="post">
             <!-- Debug mode option -->
             <label for="debug">Debug Mode:</label>
-            <input type="checkbox" id="debug" name="debug" {% if config.get('Debug', {}).get('Mode') == 'True' %}checked{% endif %}>
+            <input type="checkbox" id="debug" name="debug" {% if config['Debug']['Mode'] == 'True' %}checked{% endif %}>
             <br><br>
 
             <!-- Data File option -->
