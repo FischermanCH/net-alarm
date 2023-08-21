@@ -48,21 +48,20 @@ GENERIC
     - netdiscover
 - ...
 ARP
-- generate arpwatch configure and start page
-- ....
-- ....
+- make it possible to start arpwatch from the web interface with the saved configuration
+- use the log file for additional information 
+    - parse the log-file into a csv
+    - show the log file in a table 
+    - show the log file in live view 
 
-HOST
-- ....
-- ....
-
-LAN
-- ....
-- ....
+TCP/IP  -> placeholder, will be replaced when it is clear by what ;-)
+HOST    -> placeholder, will be replaced when it is clear by what ;-)
+LAN     -> placeholder, will be replaced when it is clear by what ;-)
 
 ALERTING
 - configure alerting
     - e-mail
+        - e-mail for arpwatch can be configured on /arpwatch/arpwatch Config
     - other 
 
 MAIN PAGE
