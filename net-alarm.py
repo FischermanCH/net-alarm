@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import csv
 import os
+import configparser
 # Importing the function from the arp_arpwatch_import script
 from scripts.arp.arp_arpwatch_import import import_arp_file
 # Importing the function from the arp_arpwatch_config script
@@ -18,6 +19,11 @@ def get_arp_table_data():
             data = list(reader)
     return data
 
+def parse_config(config_data):
+    config = configparser.ConfigParser()
+    config.read_string(config_data)
+    return config
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -28,6 +34,7 @@ def arp_page():
 
 @app.route('/arp_arpwatch_config', methods=['GET', 'POST'])
 def arp_arpwatch_config():
+    config_file_path = os.path.join("static", "config", "arpwatch.conf")
     if request.method == 'POST':
         form_data = {
             'debug': request.form.get('debug'),
@@ -40,9 +47,13 @@ def arp_arpwatch_config():
             'emailRecipient': request.form.get('emailRecipient'),
             'emailSender': request.form.get('emailSender')
         }
-        config_file_path = os.path.join("static", "config", "arpwatch.conf")
         save_config_to_file(form_data, config_file_path)
-    return render_template('arp_arpwatch_config.html')
+        return render_template('arp_arpwatch_config.html', config=form_data)
+    else:
+        with open(config_file_path, 'r') as f:
+            config_data = f.read()
+        config = parse_config(config_data)
+        return render_template('arp_arpwatch_config.html', config=config)
 
 @app.route('/tcpip_page')
 def tcpip_page():
