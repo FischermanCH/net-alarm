@@ -17,47 +17,47 @@
         <form id="arpwatchConfigForm" action="/arp_arpwatch_config" method="post">
             <!-- Debug mode option -->
             <label for="debug">Debug Mode:</label>
-            <input type="checkbox" id="debug" name="debug" {% if config['Debug']['Mode'] == 'True' %}checked{% endif %}>
+            <input type="checkbox" id="debug" name="debug" {% if config.get('Debug', {}).get('Mode') == 'True' %}checked{% endif %}>
             <br><br>
 
             <!-- Data File option -->
             <label for="file">Data File:</label>
-            <input type="text" id="file" name="file" placeholder="e.g. arp.dat" value="{{ config['File']['DataFile'] }}">
+            <input type="text" id="file" name="file" placeholder="e.g. arp.dat" value="{{ config.get('File', {}).get('DataFile', '') }}">
             <br><br>
 
             <!-- Interface option -->
             <label for="interface">Interface:</label>
-            <input type="text" id="interface" name="interface" placeholder="e.g. eth0" value="{{ config['Interface']['Name'] }}">
+            <input type="text" id="interface" name="interface" placeholder="e.g. eth0" value="{{ config.get('Interface', {}).get('Name', '') }}">
             <br><br>
 
             <!-- Additional local networks option -->
             <label for="network">Additional Local Networks:</label>
-            <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24" value="{{ config['Network']['AdditionalLocalNetworks'] }}">
+            <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24" value="{{ config.get('Network', {}).get('AdditionalLocalNetworks', '') }}">
             <br><br>
 
             <!-- Disable bogon reporting option -->
             <label for="disableBogon">Disable Bogon Reporting:</label>
-            <input type="checkbox" id="disableBogon" name="disableBogon" {% if config['Bogon']['DisableReporting'] == 'True' %}checked{% endif %}>
+            <input type="checkbox" id="disableBogon" name="disableBogon" {% if config.get('Bogon', {}).get('DisableReporting') == 'True' %}checked{% endif %}>
             <br><br>
 
             <!-- Read packets from file option -->
             <label for="readFile">Read packets from file:</label>
-            <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file" value="{{ config['Packet']['ReadFromFile'] }}">
+            <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file" value="{{ config.get('Packet', {}).get('ReadFromFile', '') }}">
             <br><br>
 
             <!-- Drop root privileges option -->
             <label for="dropPrivileges">Drop Root and Change to User:</label>
-            <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser" value="{{ config['Privileges']['DropRootAndChangeToUser'] }}">
+            <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser" value="{{ config.get('Privileges', {}).get('DropRootAndChangeToUser', '') }}">
             <br><br>
 
             <!-- Email recipient option -->
             <label for="emailRecipient">Email Recipient:</label>
-            <input type="text" id="emailRecipient" name="emailRecipient" placeholder="e.g. admin@example.com" value="{{ config['Email']['Recipient'] }}">
+            <input type="text" id="emailRecipient" name="emailRecipient" placeholder="e.g. admin@example.com" value="{{ config.get('Email', {}).get('Recipient', '') }}">
             <br><br>
 
             <!-- Email sender option -->
             <label for="emailSender">Email Sender:</label>
-            <input type="text" id="emailSender" name="emailSender" placeholder="e.g. arpwatch@example.com" value="{{ config['Email']['Sender'] }}">
+            <input type="text" id="emailSender" name="emailSender" placeholder="e.g. arpwatch@example.com" value="{{ config.get('Email', {}).get('Sender', '') }}">
             <br><br>
 
             <input type="submit" value="Save Configuration">
