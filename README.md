@@ -32,7 +32,7 @@ and btw, it's black and green because I like black and green ;-)
             - if "No" is selected, whole row is red
         - all column's are sortable by click on the title
 - arpwatch-config page 
-    - net-alarm/templates/arp_arpwatch_config.html ; net-alarm/scripts/arp/arp_arpwatch_config.py ; 
+    - net-alarm/templates/arp_arpwatch_config.html ; net-alarm/scripts/arp/arp_arpwatch_config.py 
     - form with arpwatch parameter created
     - config file created (net-alarm/static/config/arpwatch.conf)
     - form is writing and reading from config file 
