@@ -4,10 +4,10 @@
 Goal is to create a web-based network inventory/alarming for small/home LAN's.
 - NO fancy DB server, all in flattfiles
 - Easy and understandable for (skilled) end-user's
-- Posibility to work with import-files (to avoid root-issue when running aprwatch or nmap)
+- Posibility to work with import-files (to avoid root-issue when running aprwatch or similar tools)
 - Posibility to export in different formats, (e.g. export a hostfile for your FW/pi-hole)
 - Integration and configuration for aprwatch and nmap
-- Posibility for some kind of an alerting (if used with integrated arpwatch/nmap)
+- Posibility for some kind of an alerting
 - Easy installation, maybe also as pre-configured bundle for cheap hardware (Raspi's)
 
 If you are interested and would like to participate, [please drop me a note ->](https://www.fischerman.ch/?page_id=11)
