@@ -118,6 +118,7 @@ http://SERVER-IP-ADDRESS:7777/
 - ARP Page: View and manage ARP data by navigating to /arp_page.
 - Import ARP Data: You can import ARP data by navigating to /arp_arpwatch_import and uploading the appropriate ARP data file.
 - View ARP Table: To view the ARP table, navigate to /arp_table.
+- Generate and save arpwatch configuration
 
 #### Troubleshooting:
 - Port Already in Use: If you see an error that the port 7777 is already in use, you can either:
