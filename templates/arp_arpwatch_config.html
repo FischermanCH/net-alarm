@@ -8,18 +8,32 @@
     })
     .then(response => response.json())
     .then(data => {
-        // Assuming the response includes a 'status' property that indicates whether arpwatch is running
         if (data.status === 'running') {
-            // Update the UI to reflect that arpwatch is running
             document.getElementById('arpwatch-status-image').src = '/static/images/icon_yes.png';
         } else {
-            // Handle the case where arpwatch is not running or an error occurred
             document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
         }
     })
     .catch(error => {
         console.error('An error occurred:', error);
-        // Optionally, update the UI to reflect that an error occurred
+        document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+    });
+}
+
+function stopArpwatch() {
+    fetch('/stop_arpwatch', {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'stopped') {
+            document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+        } else {
+            console.error('An error occurred:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('An error occurred:', error);
         document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
     });
 }
