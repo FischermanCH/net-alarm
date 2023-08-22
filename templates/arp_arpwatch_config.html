@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>net-alarm - Arpwatch Config</title>
+    <script>
+        function runArpwatch() {
+            // Make an AJAX request to the /run_arpwatch endpoint
+            // Handle the response as needed
+        }
+    
+        function stopArpwatch() {
+            // Make an AJAX request to the /stop_arpwatch endpoint
+            // Handle the response as needed
+        }
+    </script>
+        <title>net-alarm - Arpwatch Config</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
@@ -63,7 +74,18 @@
             <input type="submit" value="Save Configuration">
         </form>
         <br>
-        <button id="runArpwatch">RUN local arpwatch</button>
+        <div class="line"></div>
+        <table style="width: 77%; margin-top: 20px;">
+            <tr>
+                <td>Arpwatch running:</td>
+                <td><img src="{{ '/static/images/icon_yes.png' if arpwatch_running else '/static/images/icon_no.png' }}" alt="Arpwatch Status"></td>
+            </tr>
+            <tr>
+                <td><button id="runArpwatch" onclick="runArpwatch()">RUN local arpwatch</button></td>
+                <td><button id="stopArpwatch" onclick="stopArpwatch()">STOP local arpwatch</button></td>
+            </tr>
+        </table>
+        
     </div>
     <div class="line"></div>
     <div class="footer">

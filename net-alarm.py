@@ -80,14 +80,13 @@ def arp_arpwatch_config():
 @app.route('/run_arpwatch', methods=['POST'])
 def run_arpwatch_route():
     message, category = run_arpwatch()
-    flash(message, category)
-    return redirect(url_for('arp_arpwatch_config'))
+    return jsonify(message=message, category=category)
 
 @app.route('/stop_arpwatch', methods=['POST'])
 def stop_arpwatch_route():
     message, category = stop_arpwatch()
-    flash(message, category)
-    return redirect(url_for('arp_arpwatch_config'))
+    return jsonify(message=message, category=category)
+
 
 @app.route('/tcpip_page')
 def tcpip_page():
