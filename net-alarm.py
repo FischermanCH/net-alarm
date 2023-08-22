@@ -4,8 +4,8 @@ import os
 import configparser
 # Importing the function from the arp_arpwatch_import script
 from scripts.arp_arpwatch_import import import_arp_file
-# Importing the function from the arp_arpwatch_config script
-from scripts.arp_arpwatch_config import save_config_to_file
+# Importing the functions from the arp_arpwatch_config script
+from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch
 
 app = Flask(__name__)
 
@@ -72,7 +72,22 @@ def arp_arpwatch_config():
         with open(config_file_path, 'r') as f:
             config_data = f.read()
         config = parse_config(config_data)
-    return render_template('arp_arpwatch_config.html', config=config)
+    
+    # Check if arpwatch is running
+    arpwatch_running = is_arpwatch_running()
+    return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running)
+
+@app.route('/run_arpwatch', methods=['POST'])
+def run_arpwatch_route():
+    message, category = run_arpwatch()
+    flash(message, category)
+    return redirect(url_for('arp_arpwatch_config'))
+
+@app.route('/stop_arpwatch', methods=['POST'])
+def stop_arpwatch_route():
+    message, category = stop_arpwatch()
+    flash(message, category)
+    return redirect(url_for('arp_arpwatch_config'))
 
 @app.route('/tcpip_page')
 def tcpip_page():
@@ -132,20 +147,18 @@ def update_known():
     data = request.json
     mac_address = data['macAddress']
     ip_address = data['ipAddress']
-    known_value = data['known']
+    known = data['known']
 
     # Path to the arp_data.csv file
     file_path = os.path.join("data", "arp_data.csv")
 
-    # Read the CSV file and update the known value
+    # Read the CSV file and update the known status
     with open(file_path, 'r') as file:
         rows = list(csv.reader(file, delimiter=';'))
 
     for row in rows:
         if row[0] == mac_address and row[1] == ip_address:
-            while len(row) < 6:
-                row.append('')
-            row[5] = known_value
+            row[4] = known
             break
 
     # Write the updated data back to the CSV file
