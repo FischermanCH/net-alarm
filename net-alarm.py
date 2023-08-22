@@ -72,7 +72,8 @@ def arp_arpwatch_config():
         with open(config_file_path, 'r') as f:
             config_data = f.read()
         config = parse_config(config_data)
-# Construct the arpwatch command based on the config file
+
+    # Construct the arpwatch command based on the config file
     arpwatch_command = "arpwatch"
     if config['Debug']['Mode'].lower() == 'on':
         arpwatch_command += " -d"
@@ -80,7 +81,18 @@ def arp_arpwatch_config():
         arpwatch_command += " -f " + config['File']['DataFile']
     if config['Interface']['Name']:
         arpwatch_command += " -i " + config['Interface']['Name']
-    if config['Network']['Additional
+    if config['Network']['AdditionalLocalNetworks']:
+        arpwatch_command += " -n " + config['Network']['AdditionalLocalNetworks']
+    if config['Bogon']['DisableReporting'] == 'True':
+        arpwatch_command += " -N"
+    if config['Packet']['ReadFromFile']:
+        arpwatch_command += " -r " + config['Packet']['ReadFromFile']
+    if config['Privileges']['DropRootAndChangeToUser']:
+        arpwatch_command += " -u " + config['Privileges']['DropRootAndChangeToUser']
+    if config['Email']['Recipient']:
+        arpwatch_command += " -m " + config['Email']['Recipient']
+    if config['Email']['Sender']:
+        arpwatch_command += " -s " + config['Email']['Sender']
 
     # Check if arpwatch is running
     arpwatch_running = is_arpwatch_running()
