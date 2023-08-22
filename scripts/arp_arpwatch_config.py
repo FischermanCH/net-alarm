@@ -1,3 +1,20 @@
+# arp_arpwatch_config.py
+import configparser
+import subprocess
+
+def run_arpwatch():
+    config_path = 'static/config/arpwatch.conf'
+    config = configparser.ConfigParser()
+    config.read(config_path)
+    user = config['Privileges']['DropRootAndChangeToUser']
+    command = ['arpwatch', '-f', config_path, '-U', user]
+    
+    try:
+        subprocess.run(command, check=True)
+        return 'Arpwatch started successfully.', 'success'
+    except subprocess.CalledProcessError:
+        return 'Failed to start arpwatch.', 'error'
+
 def save_config_to_file(form_data, config_file_path):
     with open(config_file_path, 'w') as f:
         f.write("[Debug]\n")
