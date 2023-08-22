@@ -2,15 +2,27 @@
 <html>
 <head>
     <script>
-        function runArpwatch() {
-            // Make an AJAX request to the /run_arpwatch endpoint
-            // Handle the response as needed
+  function runArpwatch() {
+    fetch('/run_arpwatch', {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Assuming the response includes a 'status' property that indicates whether arpwatch is running
+        if (data.status === 'running') {
+            // Update the UI to reflect that arpwatch is running
+            document.getElementById('arpwatch-status-image').src = '/static/images/icon_yes.png';
+        } else {
+            // Handle the case where arpwatch is not running or an error occurred
+            document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
         }
-    
-        function stopArpwatch() {
-            // Make an AJAX request to the /stop_arpwatch endpoint
-            // Handle the response as needed
-        }
+    })
+    .catch(error => {
+        console.error('An error occurred:', error);
+        // Optionally, update the UI to reflect that an error occurred
+        document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+    });
+}
     </script>
         <title>net-alarm - Arpwatch Config</title>
     <link rel="stylesheet" href="/static/css/styles.css">
@@ -78,7 +90,7 @@
         <table style="width: 77%; margin-top: 20px;">
             <tr>
                 <td>Arpwatch running:</td>
-                <td><img src="{{ '/static/images/icon_yes.png' if arpwatch_running else '/static/images/icon_no.png' }}" alt="Arpwatch Status"></td>
+                <td><img id="arpwatch-status-image" src="{{ '/static/images/icon_yes.png' if arpwatch_running else '/static/images/icon_no.png' }}" alt="Arpwatch Status"></td>
             </tr>
             <tr>
                 <td><button id="runArpwatch" onclick="runArpwatch()">RUN local arpwatch</button></td>
