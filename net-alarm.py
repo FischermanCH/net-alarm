@@ -72,11 +72,19 @@ def arp_arpwatch_config():
         with open(config_file_path, 'r') as f:
             config_data = f.read()
         config = parse_config(config_data)
-    
+# Construct the arpwatch command based on the config file
+    arpwatch_command = "arpwatch"
+    if config['Debug']['Mode'].lower() == 'on':
+        arpwatch_command += " -d"
+    if config['File']['DataFile']:
+        arpwatch_command += " -f " + config['File']['DataFile']
+    if config['Interface']['Name']:
+        arpwatch_command += " -i " + config['Interface']['Name']
+    if config['Network']['Additional
+
     # Check if arpwatch is running
     arpwatch_running = is_arpwatch_running()
     return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running)
-
     
     # Check if arpwatch is running
     arpwatch_running = is_arpwatch_running()

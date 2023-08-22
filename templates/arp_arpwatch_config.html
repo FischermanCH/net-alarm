@@ -2,43 +2,43 @@
 <html>
 <head>
     <script>
-  function runArpwatch() {
-    fetch('/run_arpwatch', {
-        method: 'POST',
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'running') {
-            document.getElementById('arpwatch-status-image').src = '/static/images/icon_yes.png';
-        } else {
-            document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+        function runArpwatch() {
+            fetch('/run_arpwatch', {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'running') {
+                    document.getElementById('arpwatch-status-image').src = '/static/images/icon_yes.png';
+                } else {
+                    document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+                }
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+                document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+            });
         }
-    })
-    .catch(error => {
-        console.error('An error occurred:', error);
-        document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
-    });
-}
 
-function stopArpwatch() {
-    fetch('/stop_arpwatch', {
-        method: 'POST',
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'stopped') {
-            document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
-        } else {
-            console.error('An error occurred:', data.message);
+        function stopArpwatch() {
+            fetch('/stop_arpwatch', {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'stopped') {
+                    document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+                } else {
+                    console.error('An error occurred:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+                document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
+            });
         }
-    })
-    .catch(error => {
-        console.error('An error occurred:', error);
-        document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
-    });
-}
     </script>
-        <title>net-alarm - Arpwatch Config</title>
+    <title>net-alarm - Arpwatch Config</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
@@ -56,59 +56,51 @@ function stopArpwatch() {
             <label for="debug">Debug Mode:</label>
             <input type="checkbox" id="debug" name="debug" {% if config['Debug']['Mode'] and config['Debug']['Mode'].lower() == 'on' %}checked{% endif %}>
             <br><br>
-
             <!-- Data File option -->
             <label for="file">Data File:</label>
             <input type="text" id="file" name="file" placeholder="e.g. arp.dat" value="{{ config['File']['DataFile'] }}">
             <br><br>
-
             <!-- Interface option -->
             <label for="interface">Interface:</label>
             <input type="text" id="interface" name="interface" placeholder="e.g. eth0" value="{{ config['Interface']['Name'] }}">
             <br><br>
-
             <!-- Additional local networks option -->
             <label for="network">Additional Local Networks:</label>
             <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24" value="{{ config['Network']['AdditionalLocalNetworks'] }}">
             <br><br>
-
             <!-- Disable bogon reporting option -->
             <label for="disableBogon">Disable Bogon Reporting:</label>
             <input type="checkbox" id="disableBogon" name="disableBogon" {% if config['Bogon']['DisableReporting'] == 'True' %}checked{% endif %}>
             <br><br>
-
             <!-- Read packets from file option -->
             <label for="readFile">Read packets from file:</label>
             <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file" value="{{ config['Packet']['ReadFromFile'] }}">
             <br><br>
-
             <!-- Drop root privileges option -->
             <label for="dropPrivileges">Drop Root and Change to User:</label>
             <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser" value="{{ config['Privileges']['DropRootAndChangeToUser'] }}">
             <br><br>
-
             <!-- Email recipient option -->
             <label for="emailRecipient">Email Recipient:</label>
             <input type="text" id="emailRecipient" name="emailRecipient" placeholder="e.g. admin@example.com" value="{{ config['Email']['Recipient'] }}">
             <br><br>
-
             <!-- Email sender option -->
             <label for="emailSender">Email Sender:</label>
             <input type="text" id="emailSender" name="emailSender" placeholder="e.g. arpwatch@example.com" value="{{ config['Email']['Sender'] }}">
             <br><br>
             <div class="line"></div>
             <input type="submit" value="Save Configuration">
-            </form>
-            <br>
-            <div class="line"></div>
-            <table style="width: 77%; margin-left: auto; margin-right: auto;">
-                <tr>
-                    <td style="text-align: center;">
-                        {{ arpwatch_command }}
-                    </td>
-                </tr>
-            </table>
-            
+        </form>
+        <br>
+        <div class="line"></div>
+        <table style="width: 77%; margin-left: auto; margin-right: auto;">
+            <tr>
+                <td style="text-align: center;">
+                    {{ arpwatch_command }}
+                </td>
+            </tr>
+        </table>
+        
         <div class="line"></div>
         <table style="width: 77%; margin-top: 20px;">
             <tr>
