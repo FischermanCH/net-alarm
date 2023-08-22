@@ -3,9 +3,9 @@ import csv
 import os
 import configparser
 # Importing the function from the arp_arpwatch_import script
-from scripts.arp.arp_arpwatch_import import import_arp_file
+from scripts.arp_arpwatch_import import import_arp_file
 # Importing the function from the arp_arpwatch_config script
-from scripts.arp.arp_arpwatch_config import save_config_to_file
+from scripts.arp_arpwatch_config import save_config_to_file
 
 app = Flask(__name__)
 

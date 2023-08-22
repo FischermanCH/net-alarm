@@ -2,6 +2,8 @@
 ### (by Fischerman.ch and Friend's)
 #### this project is realized with support from AI 
 
+
+
 Goal is to create a web-based network inventory/alarming for small/home LAN's.
 - NO fancy DB server, all in flattfiles
 - Easy and understandable for (skilled) end-user's
