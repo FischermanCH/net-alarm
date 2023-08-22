@@ -77,6 +77,11 @@ def arp_arpwatch_config():
     arpwatch_running = is_arpwatch_running()
     return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running)
 
+    
+    # Check if arpwatch is running
+    arpwatch_running = is_arpwatch_running()
+    return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running)
+
 @app.route('/run_arpwatch', methods=['POST'])
 def run_arpwatch_route():
     message, category = run_arpwatch()
