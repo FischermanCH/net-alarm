@@ -80,7 +80,7 @@ def arp_arpwatch_config():
     if config['File']['DataFile']:
         arpwatch_command += " -f " + config['File']['DataFile']
     if config['Interface']['Name']:
-        arpwatch_command += " -i " + config['Interface']['Name']
+        arpwatch_command += " -i " + config['Interface']['Name'] 
     if config['Network']['AdditionalLocalNetworks']:
         arpwatch_command += " -n " + config['Network']['AdditionalLocalNetworks']
     if config['Bogon']['DisableReporting'] == 'True':
