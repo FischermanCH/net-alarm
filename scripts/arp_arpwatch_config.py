@@ -2,6 +2,20 @@
 import configparser
 import subprocess
 
+def is_arpwatch_running():
+    try:
+        result = subprocess.run(['pgrep', 'arpwatch'], stdout=subprocess.PIPE, check=True)
+        return bool(result.stdout)
+    except subprocess.CalledProcessError:
+        return False
+
+def stop_arpwatch():
+    try:
+        subprocess.run(['pkill', 'arpwatch'], check=True)
+        return 'Arpwatch stopped successfully.', 'success'
+    except subprocess.CalledProcessError:
+        return 'Failed to stop arpwatch.', 'error'
+
 def run_arpwatch():
     config_path = 'static/config/arpwatch.conf'
     config = configparser.ConfigParser()
