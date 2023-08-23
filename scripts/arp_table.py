@@ -1,6 +1,7 @@
 import os
 import csv
 from datetime import datetime
+from net_alarm import app
 
 # Function to read ARP table data from CSV file
 def get_arp_table_data():
