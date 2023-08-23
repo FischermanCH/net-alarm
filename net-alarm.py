@@ -2,21 +2,11 @@ from flask import Flask, render_template, request, jsonify
 import csv
 import os
 import configparser
+from scripts.arp_table import get_arp_table_data
 from scripts.arp_arpwatch_import import import_arp_file
 from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch, DEFAULT_CONFIG, parse_config, construct_arpwatch_command
 
 app = Flask(__name__)
-
-# Function to read ARP table data from CSV file
-def get_arp_table_data():
-    """Reads the arp_data.csv file and returns its content."""
-    data = []
-    file_path = os.path.join("data", "arp_data.csv")
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as file:
-            reader = csv.reader(file, delimiter=';')
-            data = list(reader)
-    return data
 
 # Route for the main index page
 @app.route('/')

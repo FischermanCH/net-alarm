@@ -2,6 +2,17 @@ import os
 import csv
 from datetime import datetime
 
+# Function to read ARP table data from CSV file
+def get_arp_table_data():
+    """Reads the arp_data.csv file and returns its content."""
+    data = []
+    file_path = os.path.join("data", "arp_data.csv")
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file:
+            reader = csv.reader(file, delimiter=';')
+            data = list(reader)
+    return data
+
 def get_latest_arp_file():
     files = [f for f in os.listdir('data/import') if f.startswith('arpwatch_import_')]
     files.sort(reverse=True)
