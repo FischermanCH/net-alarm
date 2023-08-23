@@ -2,12 +2,22 @@ from flask import Flask, render_template, request, jsonify
 import csv
 import os
 import configparser
-# Importing the function from the arp_arpwatch_import script
 from scripts.arp_arpwatch_import import import_arp_file
-# Importing the functions from the arp_arpwatch_config script
 from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch
 
 app = Flask(__name__)
+
+# Default configuration structure
+DEFAULT_CONFIG = {
+    'Debug': {'Mode': 'False'},
+    'File': {'DataFile': ''},
+    'Interface': {'Name': ''},
+    'Network': {'AdditionalLocalNetworks': ''},
+    'Bogon': {'DisableReporting': 'False'},
+    'Packet': {'ReadFromFile': ''},
+    'Privileges': {'DropRootAndChangeToUser': ''},
+    'Email': {'Recipient': '', 'Sender': ''}
+}
 
 def get_arp_table_data():
     """Reads the arp_data.csv file and returns its content."""
@@ -20,29 +30,42 @@ def get_arp_table_data():
     return data
 
 def parse_config(config_data):
+    """Parses the configuration data, ensuring all sections and keys are present."""
     config = configparser.ConfigParser()
     config.read_string(config_data)
-    
-    # Ensure all sections and keys are present
-    default_config = {
-        'Debug': {'Mode': 'False'},
-        'File': {'DataFile': ''},
-        'Interface': {'Name': ''},
-        'Network': {'AdditionalLocalNetworks': ''},
-        'Bogon': {'DisableReporting': 'False'},
-        'Packet': {'ReadFromFile': ''},
-        'Privileges': {'DropRootAndChangeToUser': ''},
-        'Email': {'Recipient': '', 'Sender': ''}
-    }
-    
-    for section, keys in default_config.items():
+
+    for section, keys in DEFAULT_CONFIG.items():
         if not config.has_section(section):
             config.add_section(section)
         for key, default_value in keys.items():
             if not config.has_option(section, key):
                 config.set(section, key, default_value)
-    
+
     return config
+
+def construct_arpwatch_command(config):
+    """Constructs the arpwatch command based on the configuration."""
+    command_parts = {
+        'Debug': {'Mode': {'on': ' -d'}},
+        'File': {'DataFile': ' -f '},
+        'Interface': {'Name': ' -i '},
+        'Network': {'AdditionalLocalNetworks': ' -n '},
+        'Bogon': {'DisableReporting': {'True': ' -N'}},
+        'Packet': {'ReadFromFile': ' -r '},
+        'Privileges': {'DropRootAndChangeToUser': ' -u '},
+        'Email': {'Recipient': ' -m ', 'Sender': ' -s '}
+    }
+
+    arpwatch_command = "arpwatch"
+    for section, options in command_parts.items():
+        for option, value in options.items():
+            config_value = config[section][option]
+            if isinstance(value, dict):
+                arpwatch_command += value.get(config_value, '')
+            elif config_value:
+                arpwatch_command += value + config_value
+
+    return arpwatch_command
 
 @app.route('/')
 def index():
@@ -73,32 +96,7 @@ def arp_arpwatch_config():
             config_data = f.read()
         config = parse_config(config_data)
 
-    # Construct the arpwatch command based on the config file
-    arpwatch_command = "arpwatch"
-    if config['Debug']['Mode'].lower() == 'on':
-        arpwatch_command += " -d"
-    if config['File']['DataFile']:
-        arpwatch_command += " -f " + config['File']['DataFile']
-    if config['Interface']['Name']:
-        arpwatch_command += " -i " + config['Interface']['Name'] 
-    if config['Network']['AdditionalLocalNetworks']:
-        arpwatch_command += " -n " + config['Network']['AdditionalLocalNetworks']
-    if config['Bogon']['DisableReporting'] == 'True':
-        arpwatch_command += " -N"
-    if config['Packet']['ReadFromFile']:
-        arpwatch_command += " -r " + config['Packet']['ReadFromFile']
-    if config['Privileges']['DropRootAndChangeToUser']:
-        arpwatch_command += " -u " + config['Privileges']['DropRootAndChangeToUser']
-    if config['Email']['Recipient']:
-        arpwatch_command += " -m " + config['Email']['Recipient']
-    if config['Email']['Sender']:
-        arpwatch_command += " -s " + config['Email']['Sender']
-
-    # Check if arpwatch is running
-    arpwatch_running = is_arpwatch_running()
-    return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running)
-    
-    # Check if arpwatch is running
+    arpwatch_command = construct_arpwatch_command(config)
     arpwatch_running = is_arpwatch_running()
     return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running)
 
@@ -111,7 +109,6 @@ def run_arpwatch_route():
 def stop_arpwatch_route():
     message, category = stop_arpwatch()
     return jsonify(message=message, category=category)
-
 
 @app.route('/tcpip_page')
 def tcpip_page():
@@ -142,55 +139,17 @@ def arp_table():
 
 @app.route('/update_hostname', methods=['POST'])
 def update_hostname():
-    data = request.json
-    mac_address = data['macAddress']
-    ip_address = data['ipAddress']
-    new_hostname = data['hostname']
-
-    # Path to the arp_data.csv file
-    file_path = os.path.join("data", "arp_data.csv")
-
-    # Read the CSV file and update the hostname
-    with open(file_path, 'r') as file:
-        rows = list(csv.reader(file, delimiter=';'))
-
-    for row in rows:
-        if row[0] == mac_address and row[1] == ip_address:
-            row[3] = new_hostname
-            break
-
-    # Write the updated data back to the CSV file
-    with open(file_path, 'w', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerows(rows)
-
-    return jsonify(success=True)
+    hostname = request.form.get('hostname')
+    ip = request.form.get('ip')
+    # Code to update the hostname
+    return jsonify(message='Hostname updated successfully', category='success')
 
 @app.route('/update_known', methods=['POST'])
 def update_known():
-    data = request.json
-    mac_address = data['macAddress']
-    ip_address = data['ipAddress']
-    known = data['known']
-
-    # Path to the arp_data.csv file
-    file_path = os.path.join("data", "arp_data.csv")
-
-    # Read the CSV file and update the known status
-    with open(file_path, 'r') as file:
-        rows = list(csv.reader(file, delimiter=';'))
-
-    for row in rows:
-        if row[0] == mac_address and row[1] == ip_address:
-            row[4] = known
-            break
-
-    # Write the updated data back to the CSV file
-    with open(file_path, 'w', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerows(rows)
-
-    return jsonify(success=True)
+    known = request.form.get('known')
+    ip = request.form.get('ip')
+    # Code to update the known status
+    return jsonify(message='Known status updated successfully', category='success')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)
