@@ -36,6 +36,11 @@ def arp_arpwatch_config():
     arpwatch_running = is_arpwatch_running()
     return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running, arpwatch_command=arpwatch_command)
 # - - - - - - - - - - - - - - - - - - - - - - -
+# Route for arpwatch logs
+@app.route('/arp_arpwatch_log')
+def arp_arpwatch_log():
+    return render_template('arp_arpwatch_log.html')
+# - - - - - - - - - - - - - - - - - - - - - - -
 # Route for arpwatch import
 @app.route('/arp_arpwatch_import', methods=['GET', 'POST'])
 def arp_arpwatch_import():
