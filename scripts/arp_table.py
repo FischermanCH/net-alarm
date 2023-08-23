@@ -59,3 +59,10 @@ def get_arp_table_data():
     if latest_file:
         return update_arp_data(latest_file)
     return []
+
+@app.route('/update_hostname', methods=['POST'])
+def update_hostname():
+    hostname = request.form.get('hostname')
+    ip = request.form.get('ip')
+    # Code to update the hostname
+    return jsonify(message='Hostname updated successfully', category='success')

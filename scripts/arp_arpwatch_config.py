@@ -57,9 +57,7 @@ def arp_arpwatch_config():
                 arpwatch_command += value + config_value
 
     arpwatch_running = is_arpwatch_running()  # Determine if arpwatch is running
-
     return render_template('arp_arpwatch_config.html', config=config, arpwatch_command=arpwatch_command, arpwatch_running=arpwatch_running)
-
 
 # Parses the arpwatch configuration data, ensuring all sections and keys are present,
 # and returns a configuration object.
