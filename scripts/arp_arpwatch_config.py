@@ -14,6 +14,27 @@ DEFAULT_CONFIG = {
     'Email': {'Recipient': '', 'Sender': ''}
 }
 
+# Function to ?????
+def arp_arpwatch_config():
+    config_file_path = os.path.join("static", "config", "arpwatch.conf")
+    if request.method == 'POST':
+        form_data = {
+            'Debug': {'Mode': request.form.get('debug')},
+            'File': {'DataFile': request.form.get('file')},
+            'Interface': {'Name': request.form.get('interface')},
+            'Network': {'AdditionalLocalNetworks': request.form.get('network')},
+            'Bogon': {'DisableReporting': 'True' if request.form.get('disableBogon') else 'False'},
+            'Packet': {'ReadFromFile': request.form.get('readFile')},
+            'Privileges': {'DropRootAndChangeToUser': request.form.get('dropPrivileges')},
+            'Email': {'Recipient': request.form.get('emailRecipient'), 'Sender': request.form.get('emailSender')}
+        }
+        save_config_to_file(form_data, config_file_path)
+        config = form_data
+    else:
+        with open(config_file_path, 'r') as f:
+            config_data = f.read()
+        config = parse_config(config_data)
+
 # Function to parse the configuration data
 def parse_config(config_data):
     """Parses the configuration data, ensuring all sections and keys are present."""
@@ -26,7 +47,6 @@ def parse_config(config_data):
         for key, default_value in keys.items():
             if not config.has_option(section, key):
                 config.set(section, key, default_value)
-
     return config
 
 # Function to construct the arpwatch command

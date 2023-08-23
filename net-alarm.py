@@ -4,7 +4,7 @@ import os
 import configparser
 from scripts.arp_table import get_arp_table_data
 from scripts.arp_arpwatch_import import import_arp_file
-from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch, DEFAULT_CONFIG, parse_config, construct_arpwatch_command
+from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch, DEFAULT_CONFIG, parse_config, construct_arpwatch_command, arp_arpwatch_config
 
 app = Flask(__name__)
 
@@ -20,25 +20,8 @@ def arp_page():
 
 # Route for the ARPwatch configuration page
 @app.route('/arp_arpwatch_config', methods=['GET', 'POST'])
-def arp_arpwatch_config():
-    config_file_path = os.path.join("static", "config", "arpwatch.conf")
-    if request.method == 'POST':
-        form_data = {
-            'Debug': {'Mode': request.form.get('debug')},
-            'File': {'DataFile': request.form.get('file')},
-            'Interface': {'Name': request.form.get('interface')},
-            'Network': {'AdditionalLocalNetworks': request.form.get('network')},
-            'Bogon': {'DisableReporting': 'True' if request.form.get('disableBogon') else 'False'},
-            'Packet': {'ReadFromFile': request.form.get('readFile')},
-            'Privileges': {'DropRootAndChangeToUser': request.form.get('dropPrivileges')},
-            'Email': {'Recipient': request.form.get('emailRecipient'), 'Sender': request.form.get('emailSender')}
-        }
-        save_config_to_file(form_data, config_file_path)
-        config = form_data
-    else:
-        with open(config_file_path, 'r') as f:
-            config_data = f.read()
-        config = parse_config(config_data)
+def arp_arpwatch_config_route():
+    return arp_arpwatch_config()
 
     # Control the arpwatch command
     arpwatch_command = construct_arpwatch_command(config)
