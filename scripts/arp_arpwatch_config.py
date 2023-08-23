@@ -16,7 +16,6 @@ DEFAULT_CONFIG = {
 }
 # Handles the rendering of the arpwatch configuration page, processing form data,
 # constructing the arpwatch command, determining arpwatch status, and rendering the HTML template.
-
 def arp_arpwatch_config():
     config_file_path = os.path.join("static", "config", "arpwatch.conf")
     if request.method == 'POST':
@@ -36,7 +35,6 @@ def arp_arpwatch_config():
         with open(config_file_path, 'r') as f:
             config_data = f.read()
         config = parse_config(config_data)
-
     # Constructing the arpwatch command based on the configuration
     command_parts = {
         'Debug': {'Mode': {'on': ' -d'}},
