@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>net-alarm - TCP/IP </title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script>
+        function showPlaceholderAlert() {
+            alert("Function needs to be implemented");
+        }
+    </script>
+</head>
+<body>
+    <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
+        <tr>
+            <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
+            <td class="left"><h1>TCP/IP</h1></td>
+        </tr>
+    </table>
+    <div class="line"></div>
+    <table>
+        <tr>
+            <td class="right"><a href="javascript:void(0);" class="middle" onclick="showPlaceholderAlert();">some sub-page</a></td>
+            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
+        </tr>
+        <!-- Repeat similar rows for other sub-pages -->
+    </table>
+    <div class="line"></div>
+    <div class="footer">
+        <p><a href="{{ url_for('index') }}">back to main</a></p>
+    </div>
+</body>
+</html>
