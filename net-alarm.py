@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import csv
 import os
 import configparser
-from scripts.arp_table import get_arp_table_data, update_hostname
+from scripts.arp_table import get_arp_table_data
 from scripts.arp_arpwatch_import import import_arp_file
 from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch, DEFAULT_CONFIG, parse_config, arp_arpwatch_config as arp_arpwatch_config_logic
 
@@ -77,6 +77,13 @@ def host_page():
 def lan_page():
     return render_template('lan_page.html')
 #----------------------------------------------
+
+@app.route('/update_hostname', methods=['POST'])
+def update_hostname():
+    hostname = request.form.get('hostname')
+    ip = request.form.get('ip')
+    # Code to update the hostname
+    return jsonify(message='Hostname updated successfully', category='success')
 
 # Route to update known status
 @app.route('/update_known', methods=['POST'])
