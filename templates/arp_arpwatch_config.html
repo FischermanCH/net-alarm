@@ -88,23 +88,20 @@
             <!-- Email sender option -->
             <label for="emailSender">Email Sender:</label>
             <input type="text" id="emailSender" name="emailSender" placeholder="e.g. arpwatch@example.com" value="{{ config['Email']['Sender'] }}">
-            <br><br><div class="line"></div>
+            <br><br><br>
             <div style="text-align: center;"></div>
             <div style="text-align: center;">
                 <input type="submit" value="Save Configuration">
             </div>
         </form>
         <br>
-        <div class="line"></div>
-        <table style="width: 77%; margin-left: auto; margin-right: auto;">
+        <table style="width: 77%; margin-left: auto; margin-right: auto; border: 2px solid green; border-radius: 5px;">
             <tr>
                 <td style="text-align: center;">
                     {{ arpwatch_command }}
                 </td>
             </tr>
         </table>
-        
-        <div class="line"></div>
         <table style="width: 77%; margin-top: 20px;">
             <tr>
                 <td>Arpwatch running:</td>

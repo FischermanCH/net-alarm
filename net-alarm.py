@@ -96,6 +96,13 @@ def arp_arpwatch_config():
             config_data = f.read()
         config = parse_config(config_data)
 
+    # Controll the arpwatch command
+    arpwatch_command = construct_arpwatch_command(config)
+    print("Arpwatch Command:", arpwatch_command)  # Debug print
+    arpwatch_running = is_arpwatch_running()
+    return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running, arpwatch_command=arpwatch_command)
+
+
     arpwatch_command = construct_arpwatch_command(config)
     arpwatch_running = is_arpwatch_running()
     return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running)
@@ -150,6 +157,5 @@ def update_known():
     ip = request.form.get('ip')
     # Code to update the known status
     return jsonify(message='Known status updated successfully', category='success')
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)
