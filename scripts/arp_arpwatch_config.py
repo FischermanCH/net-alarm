@@ -1,5 +1,5 @@
 import os
-from flask import render_template
+from flask import render_template, request
 
 # arp_arpwatch_config.py
 import configparser
