@@ -1,4 +1,6 @@
 import os
+from flask import request
+
 
 # arp_arpwatch_config.py
 import configparser
