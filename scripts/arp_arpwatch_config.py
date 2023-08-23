@@ -2,6 +2,18 @@
 import configparser
 import subprocess
 
+# Default configuration structure
+DEFAULT_CONFIG = {
+    'Debug': {'Mode': 'False'},
+    'File': {'DataFile': ''},
+    'Interface': {'Name': ''},
+    'Network': {'AdditionalLocalNetworks': ''},
+    'Bogon': {'DisableReporting': 'False'},
+    'Packet': {'ReadFromFile': ''},
+    'Privileges': {'DropRootAndChangeToUser': ''},
+    'Email': {'Recipient': '', 'Sender': ''}
+}
+
 def is_arpwatch_running():
     try:
         result = subprocess.run(['pgrep', 'arpwatch'], stdout=subprocess.PIPE, check=True)
