@@ -75,17 +75,6 @@ def parse_config(config_data):
                 config.set(section, key, default_value)
     return config
 
-    arpwatch_command = "arpwatch"
-    for section, options in command_parts.items():
-        for option, value in options.items():
-            config_value = config[section][option]
-            if isinstance(value, dict):
-                arpwatch_command += value.get(config_value, '')
-            elif config_value:
-                arpwatch_command += value + config_value
-
-    return arpwatch_command
-
 # Checks if arpwatch is currently running on the system by using the 'pgrep' command.
 # Returns True if running, False otherwise.
 def is_arpwatch_running():
