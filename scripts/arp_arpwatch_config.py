@@ -1,7 +1,21 @@
 import os
 from flask import render_template, request
+import configparser
+import subprocess
 
-# arp_arpwatch_config.py
+# Default configuration structure
+DEFAULT_CONFIG = {
+    'Debug': {'Mode': 'False'},
+    'File': {'DataFile': ''},
+    'Interface': {'Name': ''},
+    'Network': {'AdditionalLocalNetworks': ''},
+    'Bogon': {'DisableReporting': 'False'},
+    'Packet': {'ReadFromFile': ''},
+    'Privileges': {'DropRootAndChangeToUser': ''},
+    'Email': {'Recipient': '', 'Sender': ''}
+}
+import os
+from flask import render_template, request
 import configparser
 import subprocess
 
@@ -17,7 +31,6 @@ DEFAULT_CONFIG = {
     'Email': {'Recipient': '', 'Sender': ''}
 }
 
-# Function to ?????
 def arp_arpwatch_config():
     config_file_path = os.path.join("static", "config", "arpwatch.conf")
     if request.method == 'POST':
@@ -38,8 +51,28 @@ def arp_arpwatch_config():
             config_data = f.read()
         config = parse_config(config_data)
 
-    return render_template('arp_arpwatch_config.html', config=config)
+    # Constructing the arpwatch command based on the configuration
+    command_parts = {
+        'Debug': {'Mode': {'on': ' -d'}},
+        'File': {'DataFile': ' -f '},
+        'Interface': {'Name': ' -i '},
+        'Network': {'AdditionalLocalNetworks': ' -n '},
+        'Bogon': {'DisableReporting': {'True': ' -N'}},
+        'Packet': {'ReadFromFile': ' -r '},
+        'Privileges': {'DropRootAndChangeToUser': ' -u '},
+        'Email': {'Recipient': ' -m ', 'Sender': ' -s '}
+    }
 
+    arpwatch_command = "arpwatch"
+    for section, options in command_parts.items():
+        for option, value in options.items():
+            config_value = config[section][option]
+            if isinstance(value, dict):
+                arpwatch_command += value.get(config_value, '')
+            elif config_value:
+                arpwatch_command += value + config_value
+
+    return render_template('arp_arpwatch_config.html', config=config, arpwatch_command=arpwatch_command)
 
 # Function to parse the configuration data
 def parse_config(config_data):
@@ -54,20 +87,6 @@ def parse_config(config_data):
             if not config.has_option(section, key):
                 config.set(section, key, default_value)
     return config
-
-# Function to construct the arpwatch command
-def construct_arpwatch_command(config):
-    """Constructs the arpwatch command based on the configuration."""
-    command_parts = {
-        'Debug': {'Mode': {'on': ' -d'}},
-        'File': {'DataFile': ' -f '},
-        'Interface': {'Name': ' -i '},
-        'Network': {'AdditionalLocalNetworks': ' -n '},
-        'Bogon': {'DisableReporting': {'True': ' -N'}},
-        'Packet': {'ReadFromFile': ' -r '},
-        'Privileges': {'DropRootAndChangeToUser': ' -u '},
-        'Email': {'Recipient': ' -m ', 'Sender': ' -s '}
-    }
 
     arpwatch_command = "arpwatch"
     for section, options in command_parts.items():
