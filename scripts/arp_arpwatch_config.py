@@ -1,6 +1,5 @@
 import os
-from flask import request
-
+from flask import render_template
 
 # arp_arpwatch_config.py
 import configparser
@@ -38,6 +37,9 @@ def arp_arpwatch_config():
         with open(config_file_path, 'r') as f:
             config_data = f.read()
         config = parse_config(config_data)
+
+    return render_template('arp_arpwatch_config.html', config=config)
+
 
 # Function to parse the configuration data
 def parse_config(config_data):
