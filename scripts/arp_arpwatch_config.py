@@ -14,6 +14,46 @@ DEFAULT_CONFIG = {
     'Email': {'Recipient': '', 'Sender': ''}
 }
 
+# Function to parse the configuration data
+def parse_config(config_data):
+    """Parses the configuration data, ensuring all sections and keys are present."""
+    config = configparser.ConfigParser()
+    config.read_string(config_data)
+
+    for section, keys in DEFAULT_CONFIG.items():
+        if not config.has_section(section):
+            config.add_section(section)
+        for key, default_value in keys.items():
+            if not config.has_option(section, key):
+                config.set(section, key, default_value)
+
+    return config
+
+# Function to construct the arpwatch command
+def construct_arpwatch_command(config):
+    """Constructs the arpwatch command based on the configuration."""
+    command_parts = {
+        'Debug': {'Mode': {'on': ' -d'}},
+        'File': {'DataFile': ' -f '},
+        'Interface': {'Name': ' -i '},
+        'Network': {'AdditionalLocalNetworks': ' -n '},
+        'Bogon': {'DisableReporting': {'True': ' -N'}},
+        'Packet': {'ReadFromFile': ' -r '},
+        'Privileges': {'DropRootAndChangeToUser': ' -u '},
+        'Email': {'Recipient': ' -m ', 'Sender': ' -s '}
+    }
+
+    arpwatch_command = "arpwatch"
+    for section, options in command_parts.items():
+        for option, value in options.items():
+            config_value = config[section][option]
+            if isinstance(value, dict):
+                arpwatch_command += value.get(config_value, '')
+            elif config_value:
+                arpwatch_command += value + config_value
+
+    return arpwatch_command
+
 def is_arpwatch_running():
     try:
         result = subprocess.run(['pgrep', 'arpwatch'], stdout=subprocess.PIPE, check=True)
