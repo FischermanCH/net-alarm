@@ -50,8 +50,9 @@
     </table>
     <div class="line"></div>
     <div class="content">
-        <h2>Arpwatch Config</h2>
+        
         <form id="arpwatchConfigForm" action="/arp_arpwatch_config" method="post">
+            <h2>actual arpwatch configuration</h2>
             <!-- Debug mode option -->
             <label for="debug">Debug Mode:</label>
             <input type="checkbox" id="debug" name="debug" {% if config['Debug']['Mode'] and config['Debug']['Mode'].lower() == 'on' %}checked{% endif %}>

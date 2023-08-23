@@ -84,7 +84,7 @@ def arp_arpwatch_config():
             'File': {'DataFile': request.form.get('file')},
             'Interface': {'Name': request.form.get('interface')},
             'Network': {'AdditionalLocalNetworks': request.form.get('network')},
-            'Bogon': {'DisableReporting': request.form.get('disableBogon')},
+            'Bogon': {'DisableReporting': 'True' if request.form.get('disableBogon') else 'False'},
             'Packet': {'ReadFromFile': request.form.get('readFile')},
             'Privileges': {'DropRootAndChangeToUser': request.form.get('dropPrivileges')},
             'Email': {'Recipient': request.form.get('emailRecipient'), 'Sender': request.form.get('emailSender')}
