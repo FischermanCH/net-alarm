@@ -4,7 +4,7 @@ import os
 import configparser
 from scripts.arp_table import get_arp_table_data
 from scripts.arp_arpwatch_import import import_arp_file
-from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch, DEFAULT_CONFIG, parse_config, construct_arpwatch_command, arp_arpwatch_config
+from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch, DEFAULT_CONFIG, parse_config, construct_arpwatch_command, arp_arpwatch_config as arp_arpwatch_config_logic
 
 app = Flask(__name__)
 
@@ -20,8 +20,9 @@ def arp_page():
 
 # Route for the ARPwatch configuration page
 @app.route('/arp_arpwatch_config', methods=['GET', 'POST'])
-def arp_arpwatch_config_route():
-    return arp_arpwatch_config()
+def arp_arpwatch_config():
+    return arp_arpwatch_config_logic()
+
 
     # Control the arpwatch command
     arpwatch_command = construct_arpwatch_command(config)
