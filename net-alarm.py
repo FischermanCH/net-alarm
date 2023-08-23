@@ -98,7 +98,6 @@ def arp_arpwatch_config():
 
     # Controll the arpwatch command
     arpwatch_command = construct_arpwatch_command(config)
-    print("Arpwatch Command:", arpwatch_command)  # Debug print
     arpwatch_running = is_arpwatch_running()
     return render_template('arp_arpwatch_config.html', config=config, arpwatch_running=arpwatch_running, arpwatch_command=arpwatch_command)
 
