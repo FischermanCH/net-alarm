@@ -34,7 +34,7 @@ def save_config_to_file(form_data, config_file_path):
     for section, options in form_data.items():
         config.add_section(section)
         for option, value in options.items():
-            config.set(section, option, value)
+            config.set(section, option, str(value))  # Convert value to string
 
     with open(config_file_path, 'w') as f:
         config.write(f)
