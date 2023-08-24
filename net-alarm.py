@@ -8,6 +8,7 @@ from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running
 from scripts.arp_arpwatch_log import get_latest_arpwatch_log
 
 app = Flask(__name__)
+setup_arp_table_routes(app)
 
 #----------------------------------------------
 # Route for the main index page
@@ -86,13 +87,6 @@ def host_page():
 def lan_page():
     return render_template('lan_page.html')
 #----------------------------------------------
-
-@app.route('/update_hostname', methods=['POST'])
-def update_hostname():
-    hostname = request.form.get('hostname')
-    ip = request.form.get('ip')
-    # Code to update the hostname
-    return jsonify(message='Hostname updated successfully', category='success')
 
 # Route to update known status
 @app.route('/update_known', methods=['POST'])
