@@ -55,6 +55,19 @@ def update_arp_data(latest_file):
 
     return existing_data
 
+# Function to set up arp_table routes
+def setup_arp_table_routes(app):
+    # Endpoint to update hostname
+    @app.route('/update_hostname', methods=['POST'])
+    def update_hostname():
+        data = request.json
+        mac_address = data['macAddress']
+        ip_address = data['ipAddress']
+        hostname = data['hostname']
+        update_arp_data(mac_address, ip_address, hostname=hostname)
+        return jsonify(message='Hostname updated successfully', category='success')
+
+
 # Endpoint to update hostname
 @app.route('/update_hostname', methods=['POST'])
 def update_hostname():
