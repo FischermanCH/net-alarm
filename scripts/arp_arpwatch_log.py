@@ -7,4 +7,5 @@ def get_latest_arpwatch_log():
     latest_log_file = max(log_files, key=os.path.getctime)
     with open(latest_log_file, 'r') as file:
         log_content = file.read()
+    print("Log Content:", log_content) # Debugging line
     return log_content
