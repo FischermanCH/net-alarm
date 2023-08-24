@@ -24,28 +24,52 @@ def get_latest_arp_file():
 def update_arp_data(latest_file):
     pass  # Existing code for updating ARP data
 
-# Function to set up arp_table routes
-def setup_arp_table_routes(app):
-    # Endpoint to update hostname
-    @app.route('/update_hostname', methods=['POST'])
-    def update_hostname():
-        mac_address = request.form.get('mac_address')
-        ip_address = request.form.get('ip_address')
-        hostname = request.form.get('hostname')
-        known = request.form.get('known')
-        print(f"Received data: MAC: {mac_address}, IP: {ip_address}, Hostname: {hostname}, Known: {known}") # Debug print
-        update_arp_data(mac_address, ip_address, hostname, known)
-        return jsonify(message='Hostname updated successfully', category='success')
-
-    # Endpoint to update known status
-    @app.route('/update_known', methods=['POST'])
-    def update_known():
+@app.route('/update_known', methods=['POST'])
+def update_known():
+    if request.json:  # If request contains JSON data
         data = request.json
         mac_address = data['macAddress']
         ip_address = data['ipAddress']
         known = data['known']
         update_arp_data(mac_address, ip_address, known=known)
+    else:  # If request contains form data
+        known = request.form.get('known')
+        ip = request.form.get('ip')
+        # Assuming you have a function to get the MAC address by IP
+        mac_address = get_mac_address_by_ip(ip)
+        update_arp_data(mac_address, ip, known=known)
+
+    return jsonify(message='Known status updated successfully', category='success')
+
+# Function to set up arp_table routes
+def setup_arp_table_routes(app):
+
+    @app.route('/update_known', methods=['POST'])
+    def update_known():
+        if request.json:  # If request contains JSON data
+            data = request.json
+            mac_address = data['macAddress']
+            ip_address = data['ipAddress']
+            known = data['known']
+            update_arp_data(mac_address, ip_address, known=known)
+        else:  # If request contains form data
+            known = request.form.get('known')
+            ip = request.form.get('ip')
+            # Assuming you have a function to get the MAC address by IP
+            mac_address = get_mac_address_by_ip(ip)
+            update_arp_data(mac_address, ip, known=known)
+
         return jsonify(message='Known status updated successfully', category='success')
+
+    @app.route('/update_hostname', methods=['POST'])
+    def update_hostname():
+        hostname = request.form.get('hostname')
+        ip = request.form.get('ip')
+        # Assuming you have a function to get the MAC address by IP
+        mac_address = get_mac_address_by_ip(ip)
+        update_arp_data(mac_address, ip, hostname=hostname)
+
+        return jsonify(message='Hostname updated successfully', category='success')
 
 # Function to update ARP data
 def update_arp_data(mac_address, ip_address, hostname=None, known=None):
