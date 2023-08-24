@@ -29,11 +29,12 @@ def setup_arp_table_routes(app):
     # Endpoint to update hostname
     @app.route('/update_hostname', methods=['POST'])
     def update_hostname():
-        data = request.json
-        mac_address = data['macAddress']
-        ip_address = data['ipAddress']
-        hostname = data['hostname']
-        update_arp_data(mac_address, ip_address, hostname=hostname)
+        mac_address = request.form.get('mac_address')
+        ip_address = request.form.get('ip_address')
+        hostname = request.form.get('hostname')
+        known = request.form.get('known')
+        print(f"Received data: MAC: {mac_address}, IP: {ip_address}, Hostname: {hostname}, Known: {known}") # Debug print
+        update_arp_data(mac_address, ip_address, hostname, known)
         return jsonify(message='Hostname updated successfully', category='success')
 
     # Endpoint to update known status
