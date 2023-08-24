@@ -159,3 +159,12 @@ th {
     border-radius: 10px; /* Rounded corners */
     margin: 20px; /* Margin outside the border */
 }
+
+#arpwatch log-data
+.log-container {
+    height: 400px; /* Adjust the height as needed */
+    overflow: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+}
