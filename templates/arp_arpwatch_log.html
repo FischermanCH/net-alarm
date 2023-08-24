@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arpwatch Log</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
+        <tr>
+            <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
+            <td class="left"><h1>arpwatch Log-Data</h1></td>
+        </tr>
+    </table>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .log-container {
+            height: 400px; /* Adjust the height as needed */
+            overflow: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Arpwatch Log</h1>
         <div class="content">
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('arp_page') }}">Back to ARP Page</a>
-            <pre>{{ log_content }}</pre>
+            <div class="log-container">
+                <pre>{{ log_content }}</pre>
+            </div>
         </div>
+    </div>
+    <div class="line"></div>
+    <div class="footer">
+        <p><a href="{{ url_for('arp_page') }}">Go back</a></p>
     </div>
 </body>
 </html>
