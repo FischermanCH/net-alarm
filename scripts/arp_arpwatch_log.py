@@ -2,10 +2,9 @@ import glob
 import os
 
 def get_latest_arpwatch_log():
-    log_dir = 'data/arpwatch/'
-    log_files = glob.glob(os.path.join(log_dir, 'arpwatch_output_*.log'))
-    latest_log_file = max(log_files, key=os.path.getctime)
-    with open(latest_log_file, 'r') as file:
-        log_content = file.read()
-    print("Log Content:", log_content) # Debugging line
-    return log_content
+    log_file_path = get_latest_arpwatch_logfile()
+    log_content = []
+    with open(log_file_path, 'r') as file:
+        log_content = file.readlines()
+    log_content.reverse()  # Reverse the order of the lines
+    return ''.join(log_content)
