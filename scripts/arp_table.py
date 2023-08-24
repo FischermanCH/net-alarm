@@ -65,4 +65,3 @@ def update_arp_data(mac_address, ip_address, hostname=None, known=None):
     with open(file_path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerows(updated_data)
-
