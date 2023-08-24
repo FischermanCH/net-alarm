@@ -29,7 +29,7 @@ and btw, it's black and green because I like black and green ;-)
     - automatic import of latest : net-alarm/data/arpwatch/arpwatch_YYDDMM file, 
         - compare and import if needed to net-alarm/data/arp_data.csv
     - present result in sortable table
-        - table is sorted by IP on load (featrure lost, due codding)
+        - table is sorted by "First seen" on load
         - table / hostname is editable, changes saved on "change focus" to net-alarm/data/arp_data.csv
         - adding column for "known" MAC addresses, clickable "Yes / No" with additional colum entry in net-alarm/data/arp_data.csv
             - if "No" is selected, whole row is red
