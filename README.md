@@ -61,9 +61,9 @@ ARP
     - show the log file in a table 
     - show the log file in live view 
 
-TCP/IP  -> placeholder, will be replaced when it is clear by what ;-)
-HOST    -> placeholder, will be replaced when it is clear by what ;-)
-LAN     -> placeholder, will be replaced when it is clear by what ;-)
+- TCP/IP  -> placeholder, will be possible replaced 
+- HOST    -> placeholder, will be possible replaced
+- LAN     -> placeholder, will be possible replaced
 
 ALERTING
 - configure alerting
