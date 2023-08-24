@@ -88,13 +88,5 @@ def lan_page():
     return render_template('lan_page.html')
 #----------------------------------------------
 
-# Route to update known status
-@app.route('/update_known', methods=['POST'])
-def update_known():
-    known = request.form.get('known')
-    ip = request.form.get('ip')
-    # Code to update the known status
-    return jsonify(message='Known status updated successfully', category='success')
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7777)
