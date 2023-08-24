@@ -65,6 +65,14 @@ def stop_arpwatch_route():
     message, category = stop_arpwatch()
     return jsonify(message=message, category=category)
 #----------------------------------------------
+# Route to show arpwatch logfile
+@app.route('/arp_arpwatch_log')
+def arp_arpwatch_log():
+    log_content = get_latest_arpwatch_log()
+    return render_template('arp_arpwatch_log.html', log_content=log_content)
+#----------------------------------------------
+
+
 # CHAPTER TCPIP
 # Route for the TCPIP page
 @app.route('/tcpip_page')
