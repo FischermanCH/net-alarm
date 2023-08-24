@@ -1,6 +1,7 @@
 import os
 import csv
 from datetime import datetime
+from flask import request, jsonify
 
 # Function to read ARP table data from CSV file
 def get_arp_table_data():
@@ -54,8 +55,39 @@ def update_arp_data(latest_file):
 
     return existing_data
 
-def get_arp_table_data():
-    latest_file = get_latest_arp_file()
-    if latest_file:
-        return update_arp_data(latest_file)
-    return []
+# Endpoint to update hostname
+@app.route('/update_hostname', methods=['POST'])
+def update_hostname():
+    data = request.json
+    mac_address = data['macAddress']
+    ip_address = data['ipAddress']
+    hostname = data['hostname']
+    update_arp_data(mac_address, ip_address, hostname=hostname)
+    return jsonify(message='Hostname updated successfully', category='success')
+
+# Endpoint to update known status
+@app.route('/update_known', methods=['POST'])
+def update_known():
+    data = request.json
+    mac_address = data['macAddress']
+    ip_address = data['ipAddress']
+    known = data['known']
+    update_arp_data(mac_address, ip_address, known=known)
+    return jsonify(message='Known status updated successfully', category='success')
+
+# Function to update ARP data
+def update_arp_data(mac_address, ip_address, hostname=None, known=None):
+    file_path = os.path.join("data", "arp_data.csv")
+    updated_data = []
+    with open(file_path, 'r') as file:
+        reader = csv.reader(file, delimiter=';')
+        for row in reader:
+            if row[0] == mac_address and row[1] == ip_address:
+                if hostname is not None:
+                    row[3] = hostname
+                if known is not None:
+                    row[5] = known
+            updated_data.append(row)
+    with open(file_path, 'w', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerows(updated_data)
