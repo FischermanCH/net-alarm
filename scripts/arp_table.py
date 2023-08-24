@@ -43,16 +43,17 @@ def setup_arp_table_routes(app):
             update_arp_data(mac_address, ip, known=known)
 
         return jsonify(message='Known status updated successfully', category='success')
+    
+@app.route('/update_hostname', methods=['POST'])
+def update_hostname():
+    data = request.json
+    mac_address = data['macAddress']
+    ip_address = data['ipAddress']
+    hostname = data['hostname']
+    update_arp_data(mac_address, ip_address, hostname=hostname)
 
-    @app.route('/update_hostname', methods=['POST'])
-    def update_hostname():
-        hostname = request.form.get('hostname')
-        ip = request.form.get('ip')
-        # Assuming you have a function to get the MAC address by IP
-        mac_address = get_mac_address_by_ip(ip)
-        update_arp_data(mac_address, ip, hostname=hostname)
+    return jsonify(message='Hostname updated successfully', category='success')
 
-        return jsonify(message='Hostname updated successfully', category='success')
 
 # Function to update ARP data
 def update_arp_data(mac_address, ip_address, hostname=None, known=None):
