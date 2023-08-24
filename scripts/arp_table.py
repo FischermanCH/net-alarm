@@ -22,38 +22,7 @@ def get_latest_arp_file():
     return None
 
 def update_arp_data(latest_file):
-    arp_data_path = 'data/arp_data.csv'
-    existing_data = []
-    existing_entries = set()
-
-    if os.path.exists(arp_data_path):
-        with open(arp_data_path, 'r') as f:
-            reader = csv.reader(f, delimiter=';')
-            for row in reader:
-                existing_data.append(row)
-                existing_entries.add((row[0], row[1]))
-
-    with open(latest_file, 'r') as f:
-        reader = csv.reader(f, delimiter=';')
-        new_data = list(reader)
-
-    for row in new_data:
-        timestamp = int(row[2])
-        formatted_date = datetime.utcfromtimestamp(timestamp).strftime('%d.%m.%y / %H:%M:%S')
-        row[2] = formatted_date
-        # Pad IP address with zeros for sorting
-        ip_parts = row[1].split('.')
-        padded_ip = '.'.join(str(int(part)).zfill(3) for part in ip_parts)
-        row[1] = padded_ip
-        if (row[0], row[1]) not in existing_entries:
-            existing_data.append(row)
-            existing_entries.add((row[0], row[1]))
-
-    with open(arp_data_path, 'w', newline='') as f:
-        writer = csv.writer(f, delimiter=';')
-        writer.writerows(existing_data)
-
-    return existing_data
+    pass  # Existing code for updating ARP data
 
 # Function to set up arp_table routes
 def setup_arp_table_routes(app):
@@ -67,31 +36,21 @@ def setup_arp_table_routes(app):
         update_arp_data(mac_address, ip_address, hostname=hostname)
         return jsonify(message='Hostname updated successfully', category='success')
 
-
-# Endpoint to update hostname
-@app.route('/update_hostname', methods=['POST'])
-def update_hostname():
-    data = request.json
-    mac_address = data['macAddress']
-    ip_address = data['ipAddress']
-    hostname = data['hostname']
-    update_arp_data(mac_address, ip_address, hostname=hostname)
-    return jsonify(message='Hostname updated successfully', category='success')
-
-# Endpoint to update known status
-@app.route('/update_known', methods=['POST'])
-def update_known():
-    data = request.json
-    mac_address = data['macAddress']
-    ip_address = data['ipAddress']
-    known = data['known']
-    update_arp_data(mac_address, ip_address, known=known)
-    return jsonify(message='Known status updated successfully', category='success')
+    # Endpoint to update known status
+    @app.route('/update_known', methods=['POST'])
+    def update_known():
+        data = request.json
+        mac_address = data['macAddress']
+        ip_address = data['ipAddress']
+        known = data['known']
+        update_arp_data(mac_address, ip_address, known=known)
+        return jsonify(message='Known status updated successfully', category='success')
 
 # Function to update ARP data
 def update_arp_data(mac_address, ip_address, hostname=None, known=None):
     file_path = os.path.join("data", "arp_data.csv")
     updated_data = []
+    print(f"Updating ARP data for MAC: {mac_address}, IP: {ip_address}, Hostname: {hostname}, Known: {known}")
     with open(file_path, 'r') as file:
         reader = csv.reader(file, delimiter=';')
         for row in reader:
@@ -101,6 +60,8 @@ def update_arp_data(mac_address, ip_address, hostname=None, known=None):
                 if known is not None:
                     row[5] = known
             updated_data.append(row)
+    print(f"Updated Data: {updated_data}")
     with open(file_path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerows(updated_data)
+
