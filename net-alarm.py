@@ -5,6 +5,7 @@ import configparser
 from scripts.arp_table import get_arp_table_data
 from scripts.arp_arpwatch_import import import_arp_file
 from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, run_arpwatch, stop_arpwatch, DEFAULT_CONFIG, parse_config, arp_arpwatch_config as arp_arpwatch_config_logic
+from scripts.arp_arpwatch_log import get_latest_arpwatch_log
 
 app = Flask(__name__)
 
