@@ -1,33 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>net-alarm - arpwatch Logs </title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <script>
-        function showPlaceholderAlert() {
-            alert("Function needs to be implemented");
-        }
-    </script>
+    <title>Arpwatch Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
-        <tr>
-            <td class="left"><h1>arpwatch LOGs</h1></td>
-        </tr>
-    </table>
-    <div class="line"></div>
-    <table>
-        <tr>
-            <td class="right"><a href="javascript:void(0);" class="middle" onclick="showPlaceholderAlert();">some sub-page</a></td>
-            <td class="left"><img src="{{ url_for('static', filename='images/icon_placeholder.png') }}" alt="Icon"></td>
-        </tr>
-        <!-- Repeat similar rows for other sub-pages -->
-    </table>
-    <div class="line"></div>
-    <div class="footer">
-        <p><a href="{{ url_for('arp_page') }}">Go back</a></p>
+    <div class="container">
+        <h1>Arpwatch Log</h1>
+        <div class="content">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('arp_page') }}">Back to ARP Page</a>
+            <pre>{{ log_content }}</pre>
+        </div>
     </div>
 </body>
 </html>
