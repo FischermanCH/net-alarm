@@ -43,16 +43,16 @@ def setup_arp_table_routes(app):
             update_arp_data(mac_address, ip, known=known)
 
         return jsonify(message='Known status updated successfully', category='success')
-    
-@app.route('/update_hostname', methods=['POST'])
-def update_hostname():
-    data = request.json
-    mac_address = data['macAddress']
-    ip_address = data['ipAddress']
-    hostname = data['hostname']
-    update_arp_data(mac_address, ip_address, hostname=hostname)
 
-    return jsonify(message='Hostname updated successfully', category='success')
+    @app.route('/update_hostname', methods=['POST'])
+    def update_hostname():
+        data = request.json
+        mac_address = data['macAddress']
+        ip_address = data['ipAddress']
+        hostname = data['hostname']
+        update_arp_data(mac_address, ip_address, hostname=hostname)
+
+        return jsonify(message='Hostname updated successfully', category='success')
 
 
 # Function to update ARP data
