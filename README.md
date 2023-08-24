@@ -39,6 +39,10 @@ and btw, it's black and green because I like black and green ;-)
     - form with arpwatch parameter created
     - config file created (net-alarm/static/config/arpwatch.conf)
     - form is writing and reading from config file 
+    - form is showing consturcted arpwatch command
+    - image (Yes/No) shows running status of arpwatch at local system
+ - arpwatch-log page   
+    - arpwatch log file is shown in reverse (latest entry first) on a html page 
 
 - CSS file generation to support themes in the future ;-)
 
