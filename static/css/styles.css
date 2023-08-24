@@ -160,7 +160,7 @@ th {
     margin: 20px; /* Margin outside the border */
 }
 
-#arpwatch log-data
+/* net-alarm/templates/arp_arpwatch_log.html */
 .log-container {
     height: 400px; /* Adjust the height as needed */
     overflow: auto;
