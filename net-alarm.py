@@ -61,7 +61,6 @@ def arp_arpwatch_log_import():
             flash('Invalid file format. Please upload a valid file.', 'danger')
             return redirect(url_for('arp_page'))  # Redirect to arp_page with an error message
     return render_template('arp_arpwatch_log_import.html')
-
 # - - - - - - - - - - - - - - - - - - - - - - -
 # Route to run arpwatch
 @app.route('/run_arpwatch', methods=['POST'])
