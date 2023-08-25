@@ -1,4 +1,5 @@
 data/arp-data.csv
+data/arp_log.csv
 scripts/arp/__pycache__/*
 data/arpwatch/arpwatch_2308110108
 data/arpwatch/arpwatch_2308110108-
