@@ -113,9 +113,9 @@ for row in csv_data:
     if not any(existing_row[3] == hostname and existing_row[4] == ip_address and existing_row[6] == ethernet_address and existing_row[8] == timestamp for existing_row in existing_data):
         existing_data.append(row.split(';'))
 
-    # Write the updated data back to arp_log.csv
-    with open(arp_log_path, 'w', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerows(existing_data)
+# Write the updated data back to arp_log.csv
+with open(arp_log_path, 'w', newline='') as file:
+    writer = csv.writer(file, delimiter=';')
+    writer.writerows(existing_data)
 
 return True  # Correctly placed inside the function
