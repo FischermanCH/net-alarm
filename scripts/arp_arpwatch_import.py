@@ -66,9 +66,9 @@ def import_arpwatch_log(file):
     content = file.read().decode('utf-8')
 
   # Process content and convert to CSV format
-entries = content.split("\n\n")
-new_data = []
-for entry in entries:
+  entries = content.split("\n\n")
+  new_data = []
+  for entry in entries:
     lines = entry.split("\n")
     split_line = lines[0].split(": ")
     if len(split_line) > 1:
@@ -76,14 +76,13 @@ for entry in entries:
     else:
         # Behandlung des Falls, dass ": " nicht in der Zeile gefunden wurde
         continue  # Zum Beispiel können Sie die Verarbeitung dieses Eintrags überspringen
-
-    to_field = lines[1].split(": ")[1]
-    subject_field = lines[2].split(": ")[1]
-    details = {line.split(": ")[0].strip(): line.split(": ")[1].strip() for line in lines[3:]}
-    details["From"] = from_field
-    details["To"] = to_field
-    details["Subject"] = subject_field
-    new_data.append(details)
+        to_field = lines[1].split(": ")[1]
+        subject_field = lines[2].split(": ")[1]
+        details = {line.split(": ")[0].strip(): line.split(": ")[1].strip() for line in lines[3:]}
+        details["From"] = from_field
+        details["To"] = to_field
+        details["Subject"] = subject_field
+        new_data.append(details)
 
 # Convert to CSV format
 csv_data = []
