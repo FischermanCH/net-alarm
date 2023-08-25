@@ -20,7 +20,7 @@ def import_arp_file(file):
     content = file.read().decode('utf-8')
     
     # Convert content to list of rows
-    new_data = [row.split('\t') for row in content.splitlines()]
+    new_data = [row.split('\\t') for row in content.splitlines()]
     
     # Process new data
     for i, row in enumerate(new_data):
@@ -52,4 +52,27 @@ def import_arp_file(file):
         writer = csv.writer(file, delimiter=';')
         writer.writerows(existing_data)
     
+    return True
+
+def import_arpwatch_log(file):
+    # Check if file exists
+    arp_log_path = os.path.join("data", "arp_log.csv")
+    if not os.path.exists(arp_log_path):
+        with open(arp_log_path, 'w') as f:
+            pass  # Create an empty file
+
+    # Read the uploaded file content
+    content = file.read().decode('utf-8')
+
+    # Process content and convert to CSV format
+    # You can write custom logic here to parse the original data and convert it to the desired CSV format
+    # ...
+
+    # Check for existing entries and append new entries
+    # You can reuse parts of the existing import_arp_file function for this logic
+    # ...
+
+    # Write the updated data back to arp_log.csv
+    # ...
+
     return True

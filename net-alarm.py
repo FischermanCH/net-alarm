@@ -49,6 +49,19 @@ def arp_arpwatch_import():
             return 'Invalid file format. Please upload a valid file.'
     return render_template('arp_arpwatch_import.html')
 # - - - - - - - - - - - - - - - - - - - - - - -
+# Route for arpwatch LOG import
+@app.route('/arp_arpwatch_log_import', methods=['POST'])
+def arp_arpwatch_log_import():
+    log_file = request.files['log_file']
+    if log_file:
+        success = import_arpwatch_log(log_file)
+        if success:
+            return 'Log file imported successfully.'
+        else:
+            return 'An error occurred during import.'
+    else:
+        return 'No file uploaded.'
+# - - - - - - - - - - - - - - - - - - - - - - -
 # Route to run arpwatch
 @app.route('/run_arpwatch', methods=['POST'])
 def run_arpwatch_route():
