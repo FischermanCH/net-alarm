@@ -53,7 +53,7 @@ def arp_arpwatch_import():
 @app.route('/arp_arpwatch_log_import', methods=['GET', 'POST'])
 def arp_arpwatch_log_import():
     if request.method == 'POST':
-        file = request.files['file']
+        file = request.files['log_file']  # Use 'log_file' instead of 'file'
         if import_arpwatch_log(file):
             flash('arpwatch Log Import Script Executed Successfully :-)', 'success')
             return redirect(url_for('arp_page'))  # Redirect to arp_page
@@ -61,6 +61,7 @@ def arp_arpwatch_log_import():
             flash('Invalid file format. Please upload a valid file.', 'danger')
             return redirect(url_for('arp_page'))  # Redirect to arp_page with an error message
     return render_template('arp_arpwatch_log_import.html')
+
 # - - - - - - - - - - - - - - - - - - - - - - -
 # Route to run arpwatch
 @app.route('/run_arpwatch', methods=['POST'])
