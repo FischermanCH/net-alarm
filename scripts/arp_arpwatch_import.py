@@ -65,35 +65,41 @@ def import_arpwatch_log(file):
     # Read the uploaded file content
     content = file.read().decode('utf-8')
 
-    # Process content and convert to CSV format
-    entries = content.split("\n\n")
-    new_data = []
-    for entry in entries:
-        lines = entry.split("\n")
-        from_field = lines[0].split(": ")[1]
-        to_field = lines[1].split(": ")[1]
-        subject_field = lines[2].split(": ")[1]
-        details = {line.split(": ")[0].strip(): line.split(": ")[1].strip() for line in lines[3:]}
-        details["From"] = from_field
-        details["To"] = to_field
-        details["Subject"] = subject_field
-        new_data.append(details)
+  # Process content and convert to CSV format
+entries = content.split("\n\n")
+new_data = []
+for entry in entries:
+    lines = entry.split("\n")
+    split_line = lines[0].split(": ")
+    if len(split_line) > 1:
+        from_field = split_line[1]
+    else:
+        # Behandlung des Falls, dass ": " nicht in der Zeile gefunden wurde
+        continue  # Zum Beispiel können Sie die Verarbeitung dieses Eintrags überspringen
 
-    # Convert to CSV format
-    csv_data = []
-    for entry in new_data:
-        row = [
-            entry["From"],
-            entry["To"],
-            entry["Subject"],
-            entry["hostname"],
-            entry["ip address"],
-            entry["interface"],
-            entry["ethernet address"],
-            '"' + entry["ethernet vendor"] + '"',
-            '"' + entry["timestamp"] + '"'
-        ]
-        csv_data.append(";".join(row))
+    to_field = lines[1].split(": ")[1]
+    subject_field = lines[2].split(": ")[1]
+    details = {line.split(": ")[0].strip(): line.split(": ")[1].strip() for line in lines[3:]}
+    details["From"] = from_field
+    details["To"] = to_field
+    details["Subject"] = subject_field
+    new_data.append(details)
+
+# Convert to CSV format
+csv_data = []
+for entry in new_data:
+    row = [
+        entry["From"],
+        entry["To"],
+        entry["Subject"],
+        entry["hostname"],
+        entry["ip address"],
+        entry["interface"],
+        entry["ethernet address"],
+        '"' + entry["ethernet vendor"] + '"',
+        '"' + entry["timestamp"] + '"'
+    ]
+    csv_data.append(";".join(row))
 
     # Read existing arp_log.csv
     existing_data = []
