@@ -20,16 +20,12 @@ def import_arp_file(file):
     content = file.read().decode('utf-8')
     
     # Convert content to list of rows
-    new_data = [row.split('\\t') for row in content.splitlines()]
+    new_data = [row.split('\t') for row in content.splitlines()]
     
     # Process new data
     for i, row in enumerate(new_data):
-        if len(row) < 2:
-        # Skip this row if it doesn't have enough elements
-            continue
         # Format IP address
         row[1] = format_ip(row[1])
-        
         # Convert Unix timestamp to human-readable format
         row[2] = unix_to_human_readable(row[2])
         # Convert the row to CSV format
