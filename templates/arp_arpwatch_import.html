@@ -27,11 +27,29 @@
     </table>
     <div class="line"></div>
 
-    <form action="/arp_arpwatch_import" method="POST" enctype="multipart/form-data" onsubmit="handleFormSubmit(event)">
-        <label for="file">Upload arpwatch file:</label>
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
+    <table>
+        <tr>
+            <td>
+                <form action="/arp_arpwatch_import" method="POST" enctype="multipart/form-data" onsubmit="handleFormSubmit(event)">
+                    <label for="file">Upload arpwatch FILE:</label>
+                    <input type="file" name="file">
+                    <input type="submit" value="Upload">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td><div class="line" style="width: 50%; height: 1px; background-color: black; margin: auto;"></div></td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/arp_arpwatch_log_import" method="POST" enctype="multipart/form-data">
+                    <label for="log_file">Upload arpwatch LOG:</label>
+                    <input type="file" name="log_file">
+                    <input type="submit" value="Upload">
+                </form>
+            </td>
+        </tr>
+    </table>
     
     <div class="line"></div>
     <div class="footer">
