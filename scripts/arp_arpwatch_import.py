@@ -59,20 +59,58 @@ def import_arpwatch_log(file):
     arp_log_path = os.path.join("data", "arp_log.csv")
     if not os.path.exists(arp_log_path):
         with open(arp_log_path, 'w') as f:
-            pass  # Create an empty file
+            writer = csv.writer(f, delimiter=';')
+            writer.writerow(["From", "To", "Subject", "hostname", "ip address", "interface", "ethernet address", "ethernet vendor", "timestamp"])  # Write header
 
     # Read the uploaded file content
     content = file.read().decode('utf-8')
 
     # Process content and convert to CSV format
-    # You can write custom logic here to parse the original data and convert it to the desired CSV format
-    # ...
+    entries = content.split("\n\n")
+    new_data = []
+    for entry in entries:
+        lines = entry.split("\n")
+        from_field = lines[0].split(": ")[1]
+        to_field = lines[1].split(": ")[1]
+        subject_field = lines[2].split(": ")[1]
+        details = {line.split(": ")[0].strip(): line.split(": ")[1].strip() for line in lines[3:]}
+        details["From"] = from_field
+        details["To"] = to_field
+        details["Subject"] = subject_field
+        new_data.append(details)
 
-    # Check for existing entries and append new entries
-    # You can reuse parts of the existing import_arp_file function for this logic
-    # ...
+    # Convert to CSV format
+    csv_data = []
+    for entry in new_data:
+        row = [
+            entry["From"],
+            entry["To"],
+            entry["Subject"],
+            entry["hostname"],
+            entry["ip address"],
+            entry["interface"],
+            entry["ethernet address"],
+            '"' + entry["ethernet vendor"] + '"',
+            '"' + entry["timestamp"] + '"'
+        ]
+        csv_data.append(";".join(row))
+
+    # Read existing arp_log.csv
+    existing_data = []
+    if os.path.exists(arp_log_path):
+        with open(arp_log_path, 'r') as file:
+            reader = csv.reader(file, delimiter=';')
+            existing_data = list(reader)
+
+    # Check and append new entries
+    for row in csv_data:
+        hostname, ip_address, ethernet_address, timestamp = row.split(';')[3], row.split(';')[4], row.split(';')[6], row.split(';')[8]
+        if not any(existing_row[3] == hostname and existing_row[4] == ip_address and existing_row[6] == ethernet_address and existing_row[8] == timestamp for existing_row in existing_data):
+            existing_data.append(row.split(';'))
 
     # Write the updated data back to arp_log.csv
-    # ...
+    with open(arp_log_path, 'w', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerows(existing_data)
 
     return True
