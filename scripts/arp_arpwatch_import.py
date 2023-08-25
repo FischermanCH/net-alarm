@@ -24,8 +24,12 @@ def import_arp_file(file):
     
     # Process new data
     for i, row in enumerate(new_data):
+        if len(row) < 2:
+        # Skip this row if it doesn't have enough elements
+            continue
         # Format IP address
         row[1] = format_ip(row[1])
+        
         # Convert Unix timestamp to human-readable format
         row[2] = unix_to_human_readable(row[2])
         # Convert the row to CSV format
