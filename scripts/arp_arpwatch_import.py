@@ -62,13 +62,13 @@ def import_arpwatch_log(file):
             writer = csv.writer(f, delimiter=';')
             writer.writerow(["From", "To", "Subject", "hostname", "ip address", "interface", "ethernet address", "ethernet vendor", "timestamp"])  # Write header
 
-    # Read the uploaded file content
-    content = file.read().decode('utf-8')
+# Read the uploaded file content
+content = file.read().decode('utf-8')
 
-  # Process content and convert to CSV format
-  entries = content.split("\n\n")
-  new_data = []
-  for entry in entries:
+# Process content and convert to CSV format
+entries = content.split("\n\n")
+new_data = []
+for entry in entries:
     lines = entry.split("\n")
     split_line = lines[0].split(": ")
     if len(split_line) > 1:
