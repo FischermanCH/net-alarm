@@ -168,3 +168,19 @@ th {
     padding: 10px;
     margin-top: 20px;
 }
+.scrollable-tbody {
+    max-height: 400px; /* Adjust this value based on your preference */
+    overflow-y: auto;
+    display: block;
+}
+
+#arpLogTable thead {
+    display: table;
+    width: 100%; /* This ensures the table header is full width */
+    position: sticky;
+    top: 0;
+}
+
+#arpLogTable tbody {
+    display: block;
+}
