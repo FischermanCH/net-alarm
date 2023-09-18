@@ -58,10 +58,6 @@ GENERIC
 - ...
 ARP
 - make it possible to start arpwatch from the web interface with the saved configuration
-- use the log file for additional information 
-    - parse the log-file into a csv
-    - show the log file in a table 
-    - show the log file in live view 
 
 - TCP/IP  -> placeholder, will be possible replaced 
 - HOST    -> placeholder, will be possible replaced
