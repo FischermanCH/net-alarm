@@ -16,6 +16,19 @@
                   window.location.href = '/arp_page';  // Redirect to ARP page using relative URL
               });
         }
+
+        function handleLogFormSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch('/arp_arpwatch_log_import', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.text())
+              .then(result => {
+                  alert(result);
+                  window.location.href = '/arp_page';  // Redirect to ARP page using relative URL
+              });
+        }
     </script>
 </head>
 <body>
@@ -42,7 +55,7 @@
         </tr>
         <tr>
             <td>
-                <form action="/arp_arpwatch_log_import" method="POST" enctype="multipart/form-data">
+                <form action="/arp_arpwatch_log_import" method="POST" enctype="multipart/form-data" onsubmit="handleLogFormSubmit(event)">
                     <label for="log_file">Upload arpwatch LOG:</label>
                     <input type="file" name="log_file" required>
                     <input type="submit" value="Upload">
