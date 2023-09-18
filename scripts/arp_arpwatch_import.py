@@ -54,6 +54,8 @@ def import_arp_file(file):
     
     return True
 
+import re
+
 def import_arpwatch_log(file):
     # Check if file exists
     arp_log_path = os.path.join("data", "arp_log.csv")
@@ -65,39 +67,16 @@ def import_arpwatch_log(file):
     # Read the uploaded file content
     content = file.read().decode('utf-8')
 
-    # Process content and convert to CSV format
-    entries = content.split("\n\n")
-    new_data = []
-    for entry in entries:
-        lines = entry.split("\n")
-        split_line = lines[0].split(": ")
-        if len(split_line) > 1:
-            from_field = split_line[1]
-        else:
-            # Behandlung des Falls, dass ": " nicht in der Zeile gefunden wurde
-            continue  # Zum Beispiel können Sie die Verarbeitung dieses Eintrags überspringen
-            to_field = lines[1].split(": ")[1]
-            subject_field = lines[2].split(": ")[1]
-            details = {line.split(": ")[0].strip(): line.split(": ")[1].strip() for line in lines[3:]}
-            details["From"] = from_field
-            details["To"] = to_field
-            details["Subject"] = subject_field
-            new_data.append(details)
+    # Regular expression pattern to extract fields from ARPwatch log entry
+    pattern = re.compile(r"From: (?P<From>.*?) \(.*?\)\nTo: (?P<To>.*?)\nSubject: (?P<Subject>.*?)\n.*?hostname: (?P<hostname>.*?)\n.*?ip address: (?P<ip_address>.*?)\n.*?interface: (?P<interface>.*?)\n.*?ethernet address: (?P<ethernet_address>.*?)\n.*?ethernet vendor: (?P<ethernet_vendor>.*?)\n.*?timestamp: (?P<timestamp>.*?)\n", re.DOTALL)
 
-    # Convert to CSV format
+    # Extract fields using the regular expression pattern
+    matches = pattern.findall(content)
+
+    # Convert matches to CSV format
     csv_data = []
-    for entry in new_data:
-        row = [
-            entry["From"],
-            entry["To"],
-            entry["Subject"],
-            entry["hostname"],
-            entry["ip address"],
-            entry["interface"],
-            entry["ethernet address"],
-            '"' + entry["ethernet vendor"] + '"',
-            '"' + entry["timestamp"] + '"'
-        ]
+    for match in matches:
+        row = list(match)
         csv_data.append(";".join(row))
 
     # Read existing arp_log.csv
@@ -109,8 +88,7 @@ def import_arpwatch_log(file):
 
     # Check and append new entries
     for row in csv_data:
-        hostname, ip_address, ethernet_address, timestamp = row.split(';')[3], row.split(';')[4], row.split(';')[6], row.split(';')[8]
-        if not any(existing_row[3] == hostname and existing_row[4] == ip_address and existing_row[6] == ethernet_address and existing_row[8] == timestamp for existing_row in existing_data):
+        if row not in existing_data:
             existing_data.append(row.split(';'))
 
     # Write the updated data back to arp_log.csv
@@ -118,5 +96,4 @@ def import_arpwatch_log(file):
         writer = csv.writer(file, delimiter=';')
         writer.writerows(existing_data)
 
-    return True  # Correctly placed inside the function
-
+    return True
