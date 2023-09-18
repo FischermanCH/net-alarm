@@ -1,5 +1,7 @@
 import os
 import re
+import csv
+
 
 def get_latest_arpwatch_log():
     log_directory = 'data/arpwatch'
@@ -11,3 +13,13 @@ def get_latest_arpwatch_log():
         log_content = file.readlines()
 
     return ''.join(reversed(log_content))
+
+def get_arpwatch_log_data():
+    arp_log_path = os.path.join("data", "arp_log.csv")
+    data = []
+    with open(arp_log_path, 'r') as file:
+        reader = csv.reader(file, delimiter=';')
+        headers = next(reader)  # Get the headers
+        for row in reader:
+            data.append(row)
+    return headers, data

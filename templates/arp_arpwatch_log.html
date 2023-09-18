@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>net-alarm - ARPwatch Log</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/styles.css">
@@ -13,6 +14,35 @@
   
  </head>
 <body>
+    
+    <table style="width: 77%; margin-top: 20px; margin-bottom: 20px;">
+        <tr>
+            <td class="right"><img src="/static/images/icon_placeholder.png" alt="Icon"></td>
+            <td class="left"><h1>ARPwatch Log</h1></td>
+        </tr>
+    </table>
+    <div class="line"></div>
+
+    <table>
+        <thead>
+            <tr>
+                {% for header in headers %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
     <div class="container">
         <h1>Arpwatch Log</h1>
         <div class="content">
