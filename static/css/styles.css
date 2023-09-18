@@ -168,19 +168,28 @@ th {
     padding: 10px;
     margin-top: 20px;
 }
+
+/* Styles for the ARPwatch Log table */
 .scrollable-tbody {
-    max-height: 400px; /* Adjust this value based on your preference */
     overflow-y: auto;
-    display: block;
+    max-height: 400px;
+    border: 1px solid #ccc;
+}
+
+#arpLogTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#arpLogTable th, #arpLogTable td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
 }
 
 #arpLogTable thead {
-    display: table;
-    width: 100%; /* This ensures the table header is full width */
+    background-color: #f2f2f2;
     position: sticky;
     top: 0;
-}
-
-#arpLogTable tbody {
-    display: block;
+    z-index: 10;
 }
