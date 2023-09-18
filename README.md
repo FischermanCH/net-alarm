@@ -23,10 +23,11 @@ and btw, it's black and green because I like black and green ;-)
 - index webpage on port 7777 with links to subpages
 - subpages with backlink to main
 - import page (arp_arpwatch_import.html & arp_arpwatch_import.py)
-    - import of a arpwatch file working and saved to data/import/arpwatch_import_YYMMDD.csv with ";" as delemiter
+    - import of a arpwatch file working and saved to net-alarm/data/arp_data.csv with ";" as delemiter
+    - import of a arpwatch LOG working and saved to net-alarm/data/arp_log.csv with ";" as delemiter
 - "arp-table" page
     - if not exist, automatic creation of net-alarm/data/arp_data.csv
-    - automatic import of latest : net-alarm/data/arpwatch/arpwatch_YYDDMM file, 
+    - automatic import of latest : net-alarm/data/arpwatch/arpwatch_YYDDMM file, // needs to be done, right now only manual import 
         - compare and import if needed to net-alarm/data/arp_data.csv
     - present result in sortable table
         - table is sorted by "First seen" on load
@@ -41,7 +42,8 @@ and btw, it's black and green because I like black and green ;-)
     - form is writing and reading from config file 
     - form is showing consturcted arpwatch command
     - image (Yes/No) shows running status of arpwatch at local system
- - arpwatch-log page   
+ - arpwatch-log page  
+    - present result in sortable html table
     - arpwatch log file is shown in reverse (latest entry first) on a html page 
 
 - CSS file generation to support themes in the future ;-)

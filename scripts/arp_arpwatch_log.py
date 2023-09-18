@@ -21,5 +21,6 @@ def get_arpwatch_log_data():
         reader = csv.reader(file, delimiter=';')
         headers = next(reader)  # Get the headers
         for row in reader:
-            data.append(row)
-    return headers, data
+            data.append(row[:-3])  # Exclude the last three columns
+    return headers[:-3], data  # Exclude the last three headers
+
