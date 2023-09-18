@@ -49,10 +49,12 @@ def import_arp_file(file):
 
 def import_arpwatch_log(file):
     arp_log_path = os.path.join("data", "arp_log.csv")
+    
+    # Create the arp_log.csv file with headers if it doesn't exist
     if not os.path.exists(arp_log_path):
         with open(arp_log_path, 'w') as f:
             writer = csv.writer(f, delimiter=';')
-            writer.writerow(["Time/Date:Subject", "MAC Address", "IP Address", "Hostname", "Vendor", "From", "To", "Interface"])
+            writer.writerow(["Time/Date", "Subject", "MAC Address", "IP Address", "Hostname", "Vendor", "Interface", "From", "To"])
 
     content = file.read().decode('utf-8')
     pattern = re.compile(r"From: (?P<From>.*?) \(.*?\)\nTo: (?P<To>.*?)\nSubject: (?P<Subject>.*?)\n.*?hostname: (?P<hostname>.*?)\n.*?ip address: (?P<ip_address>.*?)\n.*?interface: (?P<interface>.*?)\n.*?ethernet address: (?P<ethernet_address>.*?)\n.*?ethernet vendor: (?P<ethernet_vendor>.*?)\n.*?timestamp: (?P<timestamp>.*?)\n", re.DOTALL)
@@ -64,7 +66,7 @@ def import_arpwatch_log(file):
         timestamp = datetime.strptime(match[8], "%A, %B %d, %Y %H:%M:%S %z")
         formatted_timestamp = timestamp.strftime("%Y.%m.%d %H:%M:%S")
         formatted_ip = format_ip(match[4])
-        row = [formatted_timestamp + ":" + subject, match[6], formatted_ip] + list(match[3:6]) + list(match[0:2]) + [match[7]]
+        row = [formatted_timestamp, subject, match[6], formatted_ip, match[3], match[7], match[5], match[0], match[1]]
         csv_data.append(";".join(row))
 
     existing_data = []
