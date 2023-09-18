@@ -77,7 +77,12 @@ def import_arpwatch_log(file):
     for match in matches:
         # Modify the "Subject" field to remove redundant information
         subject = match[2].split(" (")[0]
-        row = list(match[:2]) + [subject] + list(match[3:])
+        
+        # Convert the timestamp to the desired format
+        timestamp = datetime.strptime(match[8], "%A, %B %d, %Y %H:%M:%S %z")
+        formatted_timestamp = timestamp.strftime("%Y:%m:%d / %H:%M:%S %z")
+        
+        row = list(match[:2]) + [subject] + list(match[3:8]) + [formatted_timestamp]
         csv_data.append(";".join(row))
 
     # Read existing arp_log.csv
