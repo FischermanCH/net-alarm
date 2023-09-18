@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 import csv
+import re
 
 def format_ip(ip_address):
     """Format IP address to fill missing octets with zeros."""
@@ -20,7 +21,7 @@ def import_arp_file(file):
     content = file.read().decode('utf-8')
     
     # Convert content to list of rows
-    new_data = [row.split('\t') for row in content.splitlines()]
+    new_data = [row.split('\\t') for row in content.splitlines()]
     
     # Process new data
     for i, row in enumerate(new_data):
@@ -54,8 +55,6 @@ def import_arp_file(file):
     
     return True
 
-import re
-
 def import_arpwatch_log(file):
     # Check if file exists
     arp_log_path = os.path.join("data", "arp_log.csv")
@@ -76,7 +75,9 @@ def import_arpwatch_log(file):
     # Convert matches to CSV format
     csv_data = []
     for match in matches:
-        row = list(match)
+        # Modify the "Subject" field to remove redundant information
+        subject = match[2].split(" (")[0]
+        row = list(match[:2]) + [subject] + list(match[3:])
         csv_data.append(";".join(row))
 
     # Read existing arp_log.csv
