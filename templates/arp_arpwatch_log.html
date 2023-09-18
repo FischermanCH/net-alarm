@@ -19,15 +19,15 @@
         <table id="arpLogTable" style="width: 90%; margin: auto;">
             <thead>
                 <tr>
-                    {% for header in headers %}
-                        <th onclick="sortTable({{ loop.index0 }})">{{ header }}</th>
+                    {% for header in headers[2:] %} <!-- Skip the first two headers -->
+                        <th onclick="sortTable({{ loop.index0 + 2 }})">{{ header }}</th> <!-- Adjust the index for sorting -->
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
                 {% for row in data %}
                     <tr>
-                        {% for cell in row %}
+                        {% for cell in row[2:] %} <!-- Skip the first two cells in each row -->
                             <td>{{ cell }}</td>
                         {% endfor %}
                     </tr>
