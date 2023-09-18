@@ -15,24 +15,26 @@
     </table>
     <div class="line"></div>
 
-    <table>
-        <thead>
-            <tr>
-                {% for header in headers %}
-                    <th>{{ header }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in data %}
+    <div class="scrollable-tbody">
+        <table id="arpLogTable" style="width: 90%; margin: auto;">
+            <thead>
                 <tr>
-                    {% for cell in row %}
-                        <td>{{ cell }}</td>
+                    {% for header in headers %}
+                        <th>{{ header }}</th>
                     {% endfor %}
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
     <div class="container">
         <h1>Arpwatch Log</h1>
