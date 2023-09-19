@@ -4,7 +4,7 @@ import os
 import configparser
 from scripts.arp_table import get_arp_table_data, setup_arp_table_routes
 from scripts.arp_arpwatch_import import import_arp_file, import_arpwatch_log
-from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, DEFAULT_CONFIG, parse_config, arp_arpwatch_config as arp_arpwatch_config_logic
+from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, DEFAULT_CONFIG, parse_config, arp_arpwatch_config as arp_arpwatch_config_logic, load_config_from_file
 from scripts.arp_arpwatch_log import get_latest_arpwatch_log, get_arpwatch_log_data
 
 app = Flask(__name__)
@@ -50,9 +50,14 @@ def update_arpwatch_config():
     param_name = request.form.get('param_name')
     param_value = request.form.get('param_value')
     
-    # Here, you'd update your configuration with the new value
-    # For demonstration purposes, I'm just printing the changes
-    print(f"Updated {param_name} with value: {param_value}")
+    # Load the current configuration
+    current_config = load_config_from_file()
+
+    # Update the configuration with the new value
+    current_config[param_name] = param_value
+
+    # Save the updated configuration back to the file
+    save_config_to_file(current_config)
 
     return jsonify(status="success")
 # - - - - - - - - - - - - - - - - - - - - - - -
