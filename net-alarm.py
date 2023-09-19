@@ -28,6 +28,7 @@ def arp_table():
     arp_data = get_arp_table_data()
     return render_template('arp_table.html', arp_data=arp_data)  
 # - - - - - - - - - - - - - - - - - - - - - - -
+# Route for arpwatch config
 @app.route('/arp_arpwatch_config', methods=['GET', 'POST'])
 def arp_arpwatch_config():
     if request.method == 'POST':
