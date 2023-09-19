@@ -54,17 +54,7 @@ def arp_arpwatch_log_import():
             return 'Invalid file format. Please upload a valid log file.'
     return render_template('arp_arpwatch_log_import.html')
 # - - - - - - - - - - - - - - - - - - - - - - -
-# Route to run arpwatch
-@app.route('/run_arpwatch', methods=['POST'])
-def run_arpwatch_route():
-    message, category = run_arpwatch()
-    return jsonify(message=message, category=category)
-# - - - - - - - - - - - - - - - - - - - - - - -
-# Route to stop arpwatch
-@app.route('/stop_arpwatch', methods=['POST'])
-def stop_arpwatch_route():
-    message, category = stop_arpwatch()
-    return jsonify(message=message, category=category)
+
 #----------------------------------------------
 # Route to show arpwatch logfile
 @app.route('/arp_arpwatch_log')

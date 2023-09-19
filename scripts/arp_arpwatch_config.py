@@ -97,29 +97,7 @@ def stop_arpwatch():
         return 'Arpwatch stopped successfully.', 'success'
     except subprocess.CalledProcessError:
         return 'Failed to stop arpwatch.', 'error'
-
-# Attempts to start arpwatch using the configuration specified in 'arpwatch.conf'.
-# Returns a success message if successful, an error message otherwise.
-def run_arpwatch():
-    """
-    Run arpwatch with the current configuration.
-    """
-    # Load the current configuration
-    with open(CONFIG_FILE_PATH, 'r') as file:
-        config_data = file.read()
-
-    config = parse_config(config_data)
-
-    # Construct the arpwatch command from the parsed configuration
-    command = config["command"]
-
-    try:
-        # Run the arpwatch command
-        subprocess.run(command, check=True, shell=True)
-        return "Arpwatch started successfully.", "success"
-    except subprocess.CalledProcessError:
-        return "Error starting arpwatch. Check the configuration and try again.", "danger"
-
+        
 # Saves the provided form data to the specified configuration file path.
 # Converts the form data into the appropriate configuration format.
 def save_config_to_file(form_data, config_file_path):
