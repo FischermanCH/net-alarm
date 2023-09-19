@@ -37,7 +37,7 @@ def arp_arpwatch_config():
         config = parse_config(config_data)
     # Constructing the arpwatch command based on the configuration
     command_parts = {
-        'Debug': {'Mode': {'on': ' -d'}},
+        'Debug': {'mode': {'on': ' -d'}},
         'File': {'DataFile': ' -f '},
         'Interface': {'Name': ' -i '},
         'Network': {'AdditionalLocalNetworks': ' -n '},
