@@ -104,11 +104,15 @@ def save_config_to_file(form_data, config_file_path):
     config = configparser.ConfigParser()
     for section, options in form_data.items():
         config.add_section(section)
-        for option, value in options.items():
-            config.set(section, option, str(value))  # Convert value to string
+        if isinstance(options, dict):  # Check if options is a dictionary
+            for option, value in options.items():
+                config.set(section, option, str(value))  # Convert value to string
+        else:  # Handle the case where options is a string
+            config.set(section, section, str(options))
     with open(config_file_path, 'w') as f:
         config.write(f)
-        
+
+
 def load_config_from_file(config_file_path):
     """
     Loads the configuration from the specified file path and returns it as a dictionary.

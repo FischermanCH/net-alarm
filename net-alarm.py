@@ -54,6 +54,15 @@ def update_arpwatch_config():
     config_file_path = "static/config/arpwatch.conf"
     current_config = load_config_from_file(config_file_path)
 
+# Debugging lines
+    print(f"Parameter Name: {param_name}")
+    print(f"Parameter Value: {param_value}")
+    print(f"Current Config Type: {type(current_config)}")
+    if isinstance(current_config, dict):
+        print(f"Current Config: {current_config}")
+    else:
+        print("Current Config is not a dictionary!")
+
     # Update the configuration with the new value
     current_config[param_name] = param_value
 
