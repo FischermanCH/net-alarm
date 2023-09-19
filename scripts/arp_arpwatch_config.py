@@ -62,16 +62,16 @@ def arp_arpwatch_config():
 # Parses the arpwatch configuration data, ensuring all sections and keys are present,
 # and returns a configuration object.
 def parse_config(config_data):
-    config = configparser.ConfigParser()
-    config.read_string(config_data)
+    """Parse the arpwatch configuration data."""
+    config_args = []
+    for line in config_data:
+        line = line.strip()
+        if not line.startswith(('[', '#', '\n', '\r\n')):
+            arg, value = line.split('=')
+            config_args.append(arg)
+            config_args.append(value)
+    return config_args
 
-    for section, keys in DEFAULT_CONFIG.items():
-        if not config.has_section(section):
-            config.add_section(section)
-        for key, default_value in keys.items():
-            if not config.has_option(section, key):
-                config.set(section, key, default_value)
-    return config
 
 # Checks if arpwatch is currently running on the system by using the 'pgrep' command.
 # Returns True if running, False otherwise.
@@ -94,20 +94,16 @@ def stop_arpwatch():
 # Attempts to start arpwatch using the configuration specified in 'arpwatch.conf'.
 # Returns a success message if successful, an error message otherwise.
 def run_arpwatch():
+    """Run arpwatch with the current configuration."""
     # Check if arpwatch is already running
     if is_arpwatch_running():
         return "Arpwatch is already running.", "warning"
 
     # Construct the arpwatch command
-    command = ["arpwatch"]
     with open(CONFIG_FILE, 'r') as f:
-        for line in f:
-            line = line.strip()
-            if not line.startswith(('[', '#', '\n', '\r\n')):
-                # Split the line into argument and value
-                arg, value = line.split('=')
-                command.append(arg)
-                command.append(value)
+        config_data = f.readlines()
+    command_args = parse_config(config_data)
+    command = ["arpwatch"] + command_args
 
     try:
         subprocess.run(command, check=True)
@@ -116,6 +112,7 @@ def run_arpwatch():
         return "Failed to start arpwatch. Check the configuration.", "danger"
     except FileNotFoundError:
         return "Arpwatch command not found. Ensure arpwatch is installed.", "danger"
+
 
 
 # Saves the provided form data to the specified configuration file path.
