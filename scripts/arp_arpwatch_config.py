@@ -67,7 +67,7 @@ def parse_config(config_data):
 
     for line in config_data.splitlines():
         line = line.strip()
-        if not line.startswith(('[', '#', '\n', '\r\n'])) and '=' in line:
+        if not line.startswith(('[', '#')) and not line.strip():
             option, value = line.split('=')
             option = option.strip()
             value = value.strip()
