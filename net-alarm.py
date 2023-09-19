@@ -43,7 +43,18 @@ def arp_arpwatch_config():
     else:
         # This is the existing logic for the GET request
         return arp_arpwatch_config_logic()
+# - - - - - - - - - - - - - - - - - - - - - - -
+# Route for arpwatch config-update
+@app.route('/update_arpwatch_config', methods=['POST'])
+def update_arpwatch_config():
+    param_name = request.form.get('param_name')
+    param_value = request.form.get('param_value')
+    
+    # Here, you'd update your configuration with the new value
+    # For demonstration purposes, I'm just printing the changes
+    print(f"Updated {param_name} with value: {param_value}")
 
+    return jsonify(status="success")
 # - - - - - - - - - - - - - - - - - - - - - - -
 # Route for arpwatch import
 @app.route('/arp_arpwatch_import', methods=['GET', 'POST'])
