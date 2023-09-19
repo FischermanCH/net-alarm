@@ -65,13 +65,12 @@ def parse_config(config_data):
     config = {}
     current_section = None
 
-    for line in config_data.splitlines():
-        line = line.strip()
-        if not line.startswith(('[', '#')) and not line.strip():
-            option, value = line.split('=')
-            option = option.strip()
-            value = value.strip()
-
+for line in config_data.splitlines():
+    line = line.strip()
+    if not line.startswith(('#', '[')) and '=' in line:
+        option, value = line.split('=')
+        option = option.strip()
+        value = value.strip()
             if current_section:
                 if current_section not in config:
                     config[current_section] = {}
