@@ -51,13 +51,16 @@ def update_arpwatch_config():
     param_value = request.form.get('param_value')
     
     # Load the current configuration
-    current_config = load_config_from_file()
+    config_file_path = "static/config/arpwatch.conf"
+    current_config = load_config_from_file(config_file_path)
 
     # Update the configuration with the new value
     current_config[param_name] = param_value
 
     # Save the updated configuration back to the file
-    save_config_to_file(current_config)
+    config_file_path = "static/config/arpwatch.conf"
+    save_config_to_file(current_config, config_file_path)
+
 
     return jsonify(status="success")
 # - - - - - - - - - - - - - - - - - - - - - - -

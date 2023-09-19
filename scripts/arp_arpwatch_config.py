@@ -108,3 +108,18 @@ def save_config_to_file(form_data, config_file_path):
             config.set(section, option, str(value))  # Convert value to string
     with open(config_file_path, 'w') as f:
         config.write(f)
+        
+def load_config_from_file(config_file_path):
+    """
+    Loads the configuration from the specified file path and returns it as a dictionary.
+    """
+    config = configparser.ConfigParser()
+    config.read(config_file_path)
+    
+    config_data = {}
+    for section in config.sections():
+        config_data[section] = {}
+        for option in config.options(section):
+            config_data[section][option] = config.get(section, option)
+    
+    return config_data
