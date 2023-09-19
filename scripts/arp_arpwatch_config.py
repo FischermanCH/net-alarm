@@ -65,19 +65,20 @@ def parse_config(config_data):
     config = {}
     current_section = None
 
-for line in config_data.splitlines():
-    line = line.strip()
-    if line.startswith('[') and line.endswith(']'):
-        current_section = line[1:-1]
-        config[current_section] = {}
-    elif '=' in line and not line.startswith('#'):
-        option, value = line.split('=')
-        option = option.strip()
-        value = value.strip()
-        if current_section:
-            config[current_section][option] = value
-        else:
-            config[option] = value
+    for line in config_data.splitlines():
+        line = line.strip()
+        if line.startswith('[') and line.endswith(']'):
+            current_section = line[1:-1]
+            config[current_section] = {}
+        elif '=' in line and not line.startswith('#'):
+            option, value = line.split('=')
+            option = option.strip()
+            value = value.strip()
+            if current_section:
+                config[current_section][option] = value
+            else:
+                config[option] = value
+    return config
 
 # Checks if arpwatch is currently running on the system by using the 'pgrep' command.
 # Returns True if running, False otherwise.
