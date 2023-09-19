@@ -4,7 +4,7 @@ import os
 import configparser
 from scripts.arp_table import get_arp_table_data, setup_arp_table_routes
 from scripts.arp_arpwatch_import import import_arp_file, import_arpwatch_log
-from scripts.arp_arpwatch_config import save_config_to_file, is_arpwatch_running, DEFAULT_CONFIG, parse_config, arp_arpwatch_config as arp_arpwatch_config_logic, load_config_from_file
+from scripts.arp_arpwatch_config import is_arpwatch_running, DEFAULT_CONFIG, parse_config, arp_arpwatch_config as arp_arpwatch_config_logic, load_config_from_file
 from scripts.arp_arpwatch_log import get_latest_arpwatch_log, get_arpwatch_log_data
 
 app = Flask(__name__)
@@ -43,35 +43,6 @@ def arp_arpwatch_config():
     else:
         # This is the existing logic for the GET request
         return arp_arpwatch_config_logic()
-# - - - - - - - - - - - - - - - - - - - - - - -
-# Route for arpwatch config-update
-@app.route('/update_arpwatch_config', methods=['POST'])
-def update_arpwatch_config():
-    param_name = request.form.get('param_name')
-    param_value = request.form.get('param_value')
-    
-    # Load the current configuration
-    config_file_path = "static/config/arpwatch.conf"
-    current_config = load_config_from_file(config_file_path)
-
-# Debugging lines
-    print(f"Parameter Name: {param_name}")
-    print(f"Parameter Value: {param_value}")
-    print(f"Current Config Type: {type(current_config)}")
-    if isinstance(current_config, dict):
-        print(f"Current Config: {current_config}")
-    else:
-        print("Current Config is not a dictionary!")
-
-    # Update the configuration with the new value
-    current_config[param_name] = param_value
-
-    # Save the updated configuration back to the file
-    config_file_path = "static/config/arpwatch.conf"
-    save_config_to_file(current_config, config_file_path)
-
-
-    return jsonify(status="success")
 # - - - - - - - - - - - - - - - - - - - - - - -
 # Route for arpwatch import
 @app.route('/arp_arpwatch_import', methods=['GET', 'POST'])
