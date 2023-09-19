@@ -6,7 +6,7 @@ import subprocess
 # Default configuration structure
 DEFAULT_CONFIG = {
     'Debug': {'mode': 'False'},
-    'File': {'DataFile': ''},
+    'File': {'datafile': ''},
     'Interface': {'Name': ''},
     'Network': {'AdditionalLocalNetworks': ''},
     'Bogon': {'DisableReporting': 'False'},
@@ -21,7 +21,7 @@ def arp_arpwatch_config():
     if request.method == 'POST':
         form_data = {
             'Debug': {'mode': request.form.get('debug')},
-            'File': {'DataFile': request.form.get('file')},
+            'File': {'datafile': request.form.get('file')},
             'Interface': {'Name': request.form.get('interface')},
             'Network': {'AdditionalLocalNetworks': request.form.get('network')},
             'Bogon': {'DisableReporting': 'True' if request.form.get('disableBogon') else 'False'},
@@ -38,7 +38,7 @@ def arp_arpwatch_config():
     # Constructing the arpwatch command based on the configuration
     command_parts = {
         'Debug': {'mode': {'on': ' -d'}},
-        'File': {'DataFile': ' -f '},
+        'File': {'datafile': ' -f '},
         'Interface': {'Name': ' -i '},
         'Network': {'AdditionalLocalNetworks': ' -n '},
         'Bogon': {'DisableReporting': {'True': ' -N'}},
