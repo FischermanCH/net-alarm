@@ -5,7 +5,7 @@ import subprocess
 
 # Default configuration structure
 DEFAULT_CONFIG = {
-    'Debug': {'Mode': 'False'},
+    'Debug': {'mode': 'False'},
     'File': {'DataFile': ''},
     'Interface': {'Name': ''},
     'Network': {'AdditionalLocalNetworks': ''},
@@ -20,7 +20,7 @@ def arp_arpwatch_config():
     config_file_path = os.path.join("static", "config", "arpwatch.conf")
     if request.method == 'POST':
         form_data = {
-            'Debug': {'Mode': request.form.get('debug')},
+            'Debug': {'mode': request.form.get('debug')},
             'File': {'DataFile': request.form.get('file')},
             'Interface': {'Name': request.form.get('interface')},
             'Network': {'AdditionalLocalNetworks': request.form.get('network')},
