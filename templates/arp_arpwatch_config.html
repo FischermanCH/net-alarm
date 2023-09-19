@@ -19,7 +19,6 @@
                 document.getElementById('arpwatch-status-image').src = '/static/images/icon_no.png';
             });
         }
-
         function stopArpwatch() {
             fetch('/stop_arpwatch', {
                 method: 'POST',

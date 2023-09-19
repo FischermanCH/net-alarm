@@ -30,7 +30,19 @@ def arp_table():
 # - - - - - - - - - - - - - - - - - - - - - - -
 @app.route('/arp_arpwatch_config', methods=['GET', 'POST'])
 def arp_arpwatch_config():
-    return arp_arpwatch_config_logic()
+    if request.method == 'POST':
+        element_id = request.form.get('element_id')
+        new_value = request.form.get('new_value')
+
+        # Here, you'd update your configuration with the new value
+        # For demonstration purposes, I'm just printing the changes
+        print(f"Updated {element_id} with value: {new_value}")
+
+        return jsonify(status="success")
+    else:
+        # This is the existing logic for the GET request
+        return arp_arpwatch_config_logic()
+
 # - - - - - - - - - - - - - - - - - - - - - - -
 # Route for arpwatch import
 @app.route('/arp_arpwatch_import', methods=['GET', 'POST'])
