@@ -72,39 +72,39 @@
             <h2>actual arpwatch configuration</h2>
             <!-- Debug mode option -->
             <label for="debug">Debug mode:</label>
-            <input type="checkbox" id="debug" name="debug" {% if config['Debug']['mode'] and config['Debug']['mode'].lower() == 'on' %}checked{% endif %}>
+            <input type="checkbox" id="debug" name="debug" {% if config['Debug']['mode'] and config['Debug']['mode'].lower() == 'on' %}checked{% endif %} onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Data File option -->
             <label for="file">Data File:</label>
-            <input type="text" id="file" name="file" placeholder="e.g. arp.dat" value="{{ config['File']['datafile'] }}">
+            <input type="text" id="file" name="file" placeholder="e.g. arp.dat" value="{{ config['File']['datafile'] }}"onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Interface option -->
             <label for="Interface">Interface:</label>
-            <input type="text" id="Interface" name="Interface" placeholder="e.g. eth0" value="{{ config['Interface']['name'] }}">
+            <input type="text" id="Interface" name="Interface" placeholder="e.g. eth0" value="{{ config['Interface']['name'] }}"onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Additional local networks option -->
             <label for="network">Additional Local Networks:</label>
-            <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24" value="{{ config['Network']['additionallocalnetworks'] }}">
+            <input type="text" id="network" name="network" placeholder="e.g. 192.168.1.0/24" value="{{ config['Network']['additionallocalnetworks'] }}"onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Disable bogon reporting option -->
             <label for="disableBogon">Disable Bogon Reporting:</label>
-            <input type="checkbox" id="disableBogon" name="disableBogon" {% if config['Bogon']['disablereporting'] == 'True' %}checked{% endif %}>
+            <input type="checkbox" id="disableBogon" name="disableBogon" {% if config['Bogon']['disablereporting'] == 'True' %}checked{% endif %}onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Read packets from file option -->
             <label for="readFile">Read packets from file:</label>
-            <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file" value="{{ config['Packet']['readfromfile'] }}">
+            <input type="text" id="readFile" name="readFile" placeholder="e.g. /path/to/file" value="{{ config['Packet']['readfromfile'] }}"onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Drop root privileges option -->
             <label for="dropPrivileges">Drop Root and Change to User:</label>
-            <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser" value="{{ config['Privileges']['droprootandchangetouser'] }}">
+            <input type="text" id="dropPrivileges" name="dropPrivileges" placeholder="e.g. webappuser" value="{{ config['Privileges']['droprootandchangetouser'] }}"onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Email recipient option -->
             <label for="emailRecipient">Email Recipient:</label>
-            <input type="text" id="emailRecipient" name="emailRecipient" placeholder="e.g. admin@example.com" value="{{ config['Email']['recipient'] }}">
+            <input type="text" id="emailRecipient" name="emailRecipient" placeholder="e.g. admin@example.com" value="{{ config['Email']['recipient'] }}"onblur="saveConfigChange('file', this.value)">
             <br><br>
             <!-- Email sender option -->
             <label for="emailSender">Email Sender:</label>
-            <input type="text" id="emailSender" name="emailSender" placeholder="e.g. arpwatch@example.com" value="{{ config['Email']['sender'] }}">
+            <input type="text" id="emailSender" name="emailSender" placeholder="e.g. arpwatch@example.com" value="{{ config['Email']['sender'] }}"onblur="saveConfigChange('file', this.value)">
             <br><br><br>
             <div style="text-align: center;"></div>
             <div style="text-align: center;">
