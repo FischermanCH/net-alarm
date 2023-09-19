@@ -62,15 +62,24 @@ def arp_arpwatch_config():
 # Parses the arpwatch configuration data, ensuring all sections and keys are present,
 # and returns a configuration object.
 def parse_config(config_data):
-    """Parse the arpwatch configuration data."""
-    config_args = []
-    for line in config_data:
+    config = {}
+    current_section = None
+
+    for line in config_data.splitlines():
         line = line.strip()
         if not line.startswith(('[', '#', '\n', '\r\n'])) and '=' in line:
-            arg, value = line.split('=')
-            config_args.append(arg)
-            config_args.append(value)
-    return config_args
+            option, value = line.split('=')
+            option = option.strip()
+            value = value.strip()
+
+            if current_section:
+                if current_section not in config:
+                    config[current_section] = {}
+                config[current_section][option] = value
+        elif line.startswith('[') and line.endswith(']'):
+            current_section = line[1:-1]
+
+    return config
 
 # Checks if arpwatch is currently running on the system by using the 'pgrep' command.
 # Returns True if running, False otherwise.
