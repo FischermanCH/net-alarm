@@ -7,12 +7,12 @@ import subprocess
 DEFAULT_CONFIG = {
     'Debug': {'mode': 'False'},
     'File': {'datafile': ''},
-    'Interface': {'Name': ''},
-    'Network': {'AdditionalLocalNetworks': ''},
-    'Bogon': {'DisableReporting': 'False'},
-    'Packet': {'ReadFromFile': ''},
-    'Privileges': {'DropRootAndChangeToUser': ''},
-    'Email': {'Recipient': '', 'Sender': ''}
+    'Interface': {'name': ''},
+    'Network': {'additionallocalnetworks': ''},
+    'Bogon': {'disablereporting': 'False'},
+    'Packet': {'readfromfile': ''},
+    'Privileges': {'droprootandchangetouser': ''},
+    'Email': {'recipient': '', 'sender': ''}
 }
 # Handles the rendering of the arpwatch configuration page, processing form data,
 # constructing the arpwatch command, determining arpwatch status, and rendering the HTML template.
@@ -22,12 +22,12 @@ def arp_arpwatch_config():
         form_data = {
             'Debug': {'mode': request.form.get('debug')},
             'File': {'datafile': request.form.get('file')},
-            'Interface': {'Name': request.form.get('interface')},
-            'Network': {'AdditionalLocalNetworks': request.form.get('network')},
-            'Bogon': {'DisableReporting': 'True' if request.form.get('disableBogon') else 'False'},
-            'Packet': {'ReadFromFile': request.form.get('readFile')},
-            'Privileges': {'DropRootAndChangeToUser': request.form.get('dropPrivileges')},
-            'Email': {'Recipient': request.form.get('emailRecipient'), 'Sender': request.form.get('emailSender')}
+            'Interface': {'name': request.form.get('interface')},
+            'Network': {'additionallocalnetworks': request.form.get('network')},
+            'Bogon': {'disablereporting': 'True' if request.form.get('disableBogon') else 'False'},
+            'Packet': {'readfromfile': request.form.get('readFile')},
+            'Privileges': {'droprootandchangetouser': request.form.get('dropPrivileges')},
+            'Email': {'recipient': request.form.get('emailrecipient'), 'sender': request.form.get('emailsender')}
         }
         save_config_to_file(form_data, config_file_path)
         config = form_data
@@ -39,12 +39,12 @@ def arp_arpwatch_config():
     command_parts = {
         'Debug': {'mode': {'on': ' -d'}},
         'File': {'datafile': ' -f '},
-        'Interface': {'Name': ' -i '},
-        'Network': {'AdditionalLocalNetworks': ' -n '},
-        'Bogon': {'DisableReporting': {'True': ' -N'}},
-        'Packet': {'ReadFromFile': ' -r '},
-        'Privileges': {'DropRootAndChangeToUser': ' -u '},
-        'Email': {'Recipient': ' -m ', 'Sender': ' -s '}
+        'Interface': {'name': ' -i '},
+        'Network': {'additionallocalnetworks': ' -n '},
+        'Bogon': {'disablereporting': {'True': ' -N'}},
+        'Packet': {'readfromfile': ' -r '},
+        'Privileges': {'droprootandchangetouser': ' -u '},
+        'Email': {'recipient': ' -m ', 'sender': ' -s '}
     }
 
     arpwatch_command = "arpwatch"
