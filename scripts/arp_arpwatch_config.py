@@ -97,12 +97,13 @@ def run_arpwatch():
     # Path to the arpwatch configuration file
     config_path = os.path.join("static", "config", "arpwatch.conf")
     
-    # Read the configuration
+    # Read the configuration and extract the command
+    command = []
     with open(config_path, 'r') as file:
-        config = file.read().strip()
-    
-    # Split the configuration into individual arguments
-    args = config.split()
+        for line in file:
+            line = line.strip()
+            if not line.startswith(('[', '#')):
+                command.extend(line.split())
     
     # Check if arpwatch is already running
     if is_arpwatch_running():
@@ -110,10 +111,11 @@ def run_arpwatch():
     
     # Execute the arpwatch command with the arguments
     try:
-        subprocess.run(args, check=True)
+        subprocess.run(command, check=True)
         return "Arpwatch started successfully.", "success"
     except subprocess.CalledProcessError as e:
         return f"Error starting arpwatch: {e}", "danger"
+
 
 
 # Saves the provided form data to the specified configuration file path.
