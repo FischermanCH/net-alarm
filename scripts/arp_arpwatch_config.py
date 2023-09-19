@@ -101,26 +101,24 @@ def stop_arpwatch():
 # Attempts to start arpwatch using the configuration specified in 'arpwatch.conf'.
 # Returns a success message if successful, an error message otherwise.
 def run_arpwatch():
-    """Run arpwatch with the current configuration."""
-    # Check if arpwatch is already running
-    if is_arpwatch_running():
-        return "Arpwatch is already running.", "warning"
+    """
+    Run arpwatch with the current configuration.
+    """
+    # Load the current configuration
+    with open(CONFIG_FILE_PATH, 'r') as file:
+        config_data = file.read()
 
-    # Construct the arpwatch command
-    with open(CONFIG_FILE, 'r') as f:
-        config_data = f.readlines()
-    command_args = parse_config(config_data)
-    command = ["arpwatch"] + command_args
+    config = parse_config(config_data)
+
+    # Construct the arpwatch command from the parsed configuration
+    command = config["command"]
 
     try:
-        subprocess.run(command, check=True)
+        # Run the arpwatch command
+        subprocess.run(command, check=True, shell=True)
         return "Arpwatch started successfully.", "success"
     except subprocess.CalledProcessError:
-        return "Failed to start arpwatch. Check the configuration.", "danger"
-    except FileNotFoundError:
-        return "Arpwatch command not found. Ensure arpwatch is installed.", "danger"
-
-
+        return "Error starting arpwatch. Check the configuration and try again.", "danger"
 
 # Saves the provided form data to the specified configuration file path.
 # Converts the form data into the appropriate configuration format.
